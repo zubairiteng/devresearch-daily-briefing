@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>{{ subject }}</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      supported-color-schemes: light dark;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f6f8;
+      color: #1a202c;
+    }
+    .wrapper {
+      max-width: 680px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 32px 28px;
+    }
+    .header h1 {
+      margin: 0 0 6px 0;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .header .subtitle {
+      color: #94a3b8;
+      font-size: 14px;
+      margin: 0;
+    }
+    .content {
+      padding: 28px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-top: 32px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+    }
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+    .brief-box {
+      background-color: #f8fafc;
+      border-left: 4px solid #3b82f6;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      font-size: 15px;
+      color: #334155;
+    }
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .card-title a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+    .card-title a:hover {
+      text-decoration: underline;
+    }
+    .meta {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    .summary-text {
+      font-size: 14px;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+    .why-it-matters {
+      font-size: 13px;
+      color: #0369a1;
+      background-color: #f0f9ff;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 8px;
+    }
+    .research-gap-box {
+      font-size: 13px;
+      color: #7c2d12;
+      background-color: #ffedd5;
+      border-left: 3px solid #f97316;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 8px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .badge-eligible {
+      background-color: #dcfce7;
+      color: #15803d;
+    }
+    .badge-maybe {
+      background-color: #fef3c7;
+      color: #b45309;
+    }
+    .badge-city {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+    .job-reason {
+      font-size: 12px;
+      color: #475569;
+      background-color: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+    .btn-apply {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #ffffff !important;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-right: 8px;
+    }
+    .btn-source {
+      display: inline-block;
+      font-size: 12px;
+      color: #64748b;
+      text-decoration: none;
+    }
+    .quote-box {
+      background: #faf5ff;
+      border-left: 4px solid #a855f7;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 24px 0;
+      font-style: italic;
+      color: #4a044e;
+    }
+    .quote-author {
+      font-weight: 600;
+      font-style: normal;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #7e22ce;
+    }
+    .footer {
+      background-color: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px 28px;
+      font-size: 12px;
+      color: #94a3b8;
+      text-align: center;
+    }
+    .footer a {
+      color: #64748b;
+      text-decoration: underline;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0b0f19;
+        color: #f1f5f9;
+      }
+      .wrapper {
+        background-color: #111827;
+        border-color: #1f2937;
+      }
+      .section-title {
+        color: #f8fafc;
+        border-color: #1f2937;
+      }
+      .brief-box {
+        background-color: #1e293b;
+        color: #e2e8f0;
+      }
+      .card {
+        background-color: #1f2937;
+        border-color: #374151;
+      }
+      .card-title a {
+        color: #60a5fa;
+      }
+      .summary-text {
+        color: #cbd5e1;
+      }
+      .why-it-matters {
+        background-color: #082f49;
+        color: #7dd3fc;
+      }
+      .research-gap-box {
+        background-color: #451a03;
+        color: #fdba74;
+      }
+      .job-reason {
+        background-color: #111827;
+        color: #94a3b8;
+      }
+      .quote-box {
+        background-color: #2e1065;
+        color: #f3e8ff;
+      }
+      .footer {
+        background-color: #0f172a;
+        border-color: #1e293b;
+        color: #64748b;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <h1>DevResearch Daily Briefing</h1>
+      <p class="subtitle">{{ date_str }} &bull; Delivered for University Lecturer, Placement & AI Research Profile</p>
+    </div>
+
+    <div class="content">
+      <!-- 1. Today in brief (3 lines) -->
+      <div class="section-title">Today in Brief</div>
+      <div class="brief-box">
+        {% for line in today_in_brief %}
+          <div style="margin-bottom: 6px;">&bull; {{ line }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- 2. AI & LLM News -->
+      <div class="section-title">AI &amp; LLM Industry News</div>
+      {% for item in ai_items %}
+        <div class="card">
+          <div class="card-title">
+            <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+          </div>
+          <div class="meta">{{ item.source_name }} &bull; Score: {{ item.score }}/100</div>
+          <div class="summary-text">{{ item.summary }}</div>
+          {% if item.why_it_matters %}
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> {{ item.why_it_matters }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <!-- 3. Dev & Cloud -->
+      <div class="section-title">Software &amp; Cloud Development</div>
+      {% for item in dev_items %}
+        <div class="card">
+          <div class="card-title">
+            <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+          </div>
+          <div class="meta">{{ item.source_name }} &bull; Score: {{ item.score }}/100</div>
+          <div class="summary-text">{{ item.summary }}</div>
+          {% if item.why_it_matters %}
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> {{ item.why_it_matters }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <!-- 4. Research Watch -->
+      <div class="section-title">Research Watch &amp; Open Gaps</div>
+      {% for item in research_items %}
+        <div class="card">
+          <div class="card-title">
+            <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+          </div>
+          <div class="meta">{{ item.source_name }} &bull; Score: {{ item.score }}/100</div>
+          <div class="summary-text">{{ item.summary }}</div>
+          {% if item.why_it_matters %}
+            <div class="why-it-matters"><strong>Relevance:</strong> {{ item.why_it_matters }}</div>
+          {% endif %}
+          {% if item.research_gap %}
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> {{ item.research_gap }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <!-- 5. Jobs for You -->
+      <div class="section-title">Jobs for You (Pakistan: Lahore &amp; Gujranwala First)</div>
+      {% if new_jobs %}
+        {% for job in new_jobs %}
+          <div class="card">
+            <div class="card-title">
+              <a href="{{ job.apply_link or job.primary_url }}" target="_blank">{{ job.title }}</a>
+            </div>
+            <div class="meta">
+              <strong>{{ job.organization }}</strong> &bull;
+              <span class="badge badge-city">{{ job.city }}</span>
+              <span class="badge {% if job.eligibility_status == 'ELIGIBLE' %}badge-eligible{% else %}badge-maybe{% endif %}">
+                {{ job.eligibility_status }}
+              </span>
+              &bull; Deadline: <strong>{{ job.deadline }}</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> {{ job.eligibility_reason }}
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="{{ job.apply_link or job.primary_url }}" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="{{ job.primary_url }}" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p style="color: #64748b; font-style: italic;">No new matching openings were posted in the last 24 hours. Your closing soon tracker is listed below.</p>
+      {% endif %}
+
+      <!-- Closing Soon Jobs Sub-section -->
+      {% if closing_soon_jobs %}
+        <div style="margin-top: 20px;">
+          <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px;">Closing Soon (Next 5 Days)</h4>
+          {% for cs in closing_soon_jobs %}
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>{{ cs.title }}</strong> &bull; {{ cs.organization }} ({{ cs.city }}) &bull; Deadline: <strong style="color: #b91c1c;">{{ cs.deadline }}</strong>
+              <div style="margin-top: 4px;">
+                <a href="{{ cs.apply_link or cs.primary_url }}" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Remote & AI-Automation Jobs -->
+      <div class="section-title">Remote &amp; AI-Automation Jobs (Worldwide &amp; Open to Pakistan)</div>
+      {% if remote_ai_jobs %}
+        {% for rjob in remote_ai_jobs %}
+          <div class="card">
+            <div class="card-title">
+              <a href="{{ rjob.apply_link or rjob.primary_url }}" target="_blank">{{ rjob.title }}</a>
+            </div>
+            <div class="meta">
+              <strong>{{ rjob.organization }}</strong> &bull;
+              <span class="badge badge-city">Worldwide Remote</span>
+              <span class="badge {% if rjob.eligibility_status == 'ELIGIBLE' %}badge-eligible{% else %}badge-maybe{% endif %}">
+                {{ rjob.eligibility_status }}
+              </span>
+              &bull; Score: <strong>{{ rjob.relevance_score }}/100</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility &amp; Region Check:</strong> {{ rjob.eligibility_reason }}
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="{{ rjob.apply_link or rjob.primary_url }}" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="{{ rjob.primary_url }}" class="btn-source" target="_blank">Source Link &rarr;</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p style="color: #64748b; font-style: italic;">No new remote AI jobs logged in the last 24 hours.</p>
+      {% endif %}
+
+      <!-- 6. Quote of the Day -->
+      <div class="quote-box">
+        "{{ quote.text }}"
+        <div class="quote-author">&mdash; {{ quote.author }} ({{ quote.show or 'Interview Archive' }})</div>
+      </div>
+
+      <!-- 7. Read Later List -->
+      {% if read_later_items %}
+        <div class="section-title">Your Saved Read Later List</div>
+        <ul style="padding-left: 20px; font-size: 14px; color: #334155;">
+          {% for r in read_later_items %}
+            <li style="margin-bottom: 6px;">
+              <a href="{{ r.url }}" style="color: #1d4ed8; text-decoration: none;" target="_blank">{{ r.title }}</a>
+              <span style="color: #64748b; font-size: 12px;">({{ r.source_name }})</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      DevResearch Daily Briefing &bull; Configured for Pakistan (Asia/Karachi 10:00 AM)<br>
+      Manage your profile, sources, or job tracking in the local dashboard.
+    </div>
+  </div>
+</body>
+</html>

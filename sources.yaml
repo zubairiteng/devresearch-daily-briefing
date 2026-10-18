@@ -1,0 +1,262 @@
+# DevResearch Daily Briefing - Sources Configuration
+# All news, research, and job sources configured here. Free & legal first.
+
+news:
+  rss_feeds:
+    # Major LLM Providers & Labs
+    - name: "OpenAI Blog"
+      category: "ai_llm"
+      url: "https://openai.com/news/rss.xml"
+      enabled: true
+    - name: "Anthropic News"
+      category: "ai_llm"
+      url: "https://raw.githubusercontent.com/anthropics/anthropic-sdk-python/main/RELEASES.md" # or official announcements
+      rss_alternative: "https://news.ycombinator.com/rss"
+      enabled: true
+    - name: "Google DeepMind Blog"
+      category: "ai_llm"
+      url: "https://deepmind.google/blog/rss.xml"
+      enabled: true
+    - name: "Google AI Blog"
+      category: "ai_llm"
+      url: "https://blog.google/technology/ai/rss/"
+      enabled: true
+    - name: "Hugging Face Blog"
+      category: "ai_llm"
+      url: "https://huggingface.co/blog/feed.xml"
+      enabled: true
+
+    # Cloud & Software Development
+    - name: "AWS News Blog"
+      category: "software_cloud"
+      url: "https://aws.amazon.com/blogs/aws/feed/"
+      enabled: true
+    - name: "Microsoft Azure Blog"
+      category: "software_cloud"
+      url: "https://azure.microsoft.com/en-us/blog/feed/"
+      enabled: true
+    - name: "Google Cloud Blog"
+      category: "software_cloud"
+      url: "https://cloud.google.com/blog/rss/"
+      enabled: true
+
+    # Tech & Tech-Race (Musk, Hardware, Industry Moves)
+    - name: "TechCrunch AI"
+      category: "ai_llm"
+      url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+      enabled: true
+    - name: "The Verge Tech"
+      category: "software_cloud"
+      url: "https://www.theverge.com/rss/index.xml"
+      enabled: true
+    - name: "Ars Technica"
+      category: "software_cloud"
+      url: "https://feeds.arstechnica.com/arstechnica/index"
+      enabled: true
+    - name: "MIT Technology Review"
+      category: "research_watch"
+      url: "https://www.technologyreview.com/feed/"
+      enabled: true
+
+  arxiv:
+    enabled: true
+    api_url: "https://export.arxiv.org/api/query"
+    categories:
+      - "cs.CL"      # Computation and Language (NLP)
+      - "cs.AI"      # Artificial Intelligence
+      - "cs.LG"      # Machine Learning
+      - "quant-ph"   # Quantum Physics / Quantum Computing
+    max_results: 15
+    sort_by: "submittedDate"
+    sort_order: "descending"
+
+  hacker_news:
+    enabled: true
+    api_url: "https://hacker-news.firebaseio.com/v0"
+    max_items: 30
+    keywords_filter:
+      - "llm"
+      - "ai"
+      - "gpt"
+      - "claude"
+      - "deepseek"
+      - "gemini"
+      - "llama"
+      - "quantum"
+      - "cloud"
+      - "framework"
+      - "react"
+      - "python"
+      - "rust"
+      - "docker"
+      - "kubernetes"
+
+  reddit:
+    enabled: true
+    subreddits:
+      - name: "r/MachineLearning"
+        url: "https://www.reddit.com/r/MachineLearning/hot.json?limit=15"
+        category: "research_watch"
+      - name: "r/LocalLLaMA"
+        url: "https://www.reddit.com/r/LocalLLaMA/hot.json?limit=15"
+        category: "ai_llm"
+
+  github:
+    enabled: true
+    repositories:
+      - "vllm-project/vllm"
+      - "ggerganov/llama.cpp"
+      - "huggingface/transformers"
+      - "ollama/ollama"
+      - "langchain-ai/langchain"
+      - "microsoft/autogen"
+
+  podcasts:
+    enabled: true
+    feeds:
+      - name: "Lex Fridman Podcast"
+        url: "https://lexfridman.com/feed/podcast/"
+        speaker_hint: "Lex Fridman & Guests"
+      - name: "Latent Space: The AI Engineer Podcast"
+        url: "https://www.latent.space/feed"
+        speaker_hint: "Swyx & Alessio"
+      - name: "The Dwarkesh Podcast"
+        url: "https://www.dwarkeshpatel.com/feed"
+        speaker_hint: "Dwarkesh Patel"
+
+jobs:
+  pakistan_sources:
+    # Indeed RSS queries for priority cities and target roles
+    - name: "Indeed PK - CS Lecturer & Faculty (Lahore)"
+      type: "rss"
+      url: "https://pk.indeed.com/rss?q=Lecturer+Computer+Science&l=Lahore"
+      city: "Lahore"
+      enabled: true
+    - name: "Indeed PK - AI & ML Engineer (Lahore)"
+      type: "rss"
+      url: "https://pk.indeed.com/rss?q=AI+Machine+Learning&l=Lahore"
+      city: "Lahore"
+      enabled: true
+    - name: "Indeed PK - Software Engineer (Gujranwala)"
+      type: "rss"
+      url: "https://pk.indeed.com/rss?q=Software+Engineer&l=Gujranwala"
+      city: "Gujranwala"
+      enabled: true
+    - name: "Indeed PK - Placement & Trainer (Lahore/Punjab)"
+      type: "rss"
+      url: "https://pk.indeed.com/rss?q=Placement+Officer+Trainer&l=Lahore"
+      city: "Lahore"
+      enabled: true
+
+    # Web & portal monitors for Universities (Lahore & Gujranwala first)
+    - name: "University of the Punjab (PU)"
+      type: "university_portal"
+      city: "Lahore"
+      url: "http://pu.edu.pk/careers/"
+      manual_url: "http://pu.edu.pk/careers/"
+      enabled: true
+    - name: "UET Lahore"
+      type: "university_portal"
+      city: "Lahore"
+      url: "https://jobs.uet.edu.pk/"
+      manual_url: "https://jobs.uet.edu.pk/"
+      enabled: true
+    - name: "FAST-NUCES Lahore"
+      type: "university_portal"
+      city: "Lahore"
+      url: "https://nu.edu.pk/Career"
+      manual_url: "https://nu.edu.pk/Career"
+      enabled: true
+    - name: "COMSATS University Lahore"
+      type: "university_portal"
+      city: "Lahore"
+      url: "https://lahore.comsats.edu.pk/career/"
+      manual_url: "https://lahore.comsats.edu.pk/career/"
+      enabled: true
+    - name: "GIFT University Gujranwala"
+      type: "university_portal"
+      city: "Gujranwala"
+      url: "https://www.gift.edu.pk/careers/"
+      manual_url: "https://www.gift.edu.pk/careers/"
+      enabled: true
+    - name: "University of Gujrat (UOG)"
+      type: "university_portal"
+      city: "Gujrat"
+      url: "https://uog.edu.pk/career"
+      manual_url: "https://uog.edu.pk/career"
+      enabled: true
+    - name: "UMT Lahore"
+      type: "university_portal"
+      city: "Lahore"
+      url: "https://careers.umt.edu.pk/"
+      manual_url: "https://careers.umt.edu.pk/"
+      enabled: true
+
+    # Govt & Skills Programs
+    - name: "PPSC Jobs (Punjab Public Service Commission)"
+      type: "govt_portal"
+      city: "Lahore"
+      url: "https://www.ppsc.gop.pk/(S(1))/Jobs.aspx"
+      manual_url: "https://www.ppsc.gop.pk/"
+      enabled: true
+    - name: "HEC Jobs Portal"
+      type: "govt_portal"
+      city: "Islamabad"
+      url: "https://careers.hec.gov.pk/"
+      manual_url: "https://careers.hec.gov.pk/"
+      enabled: true
+    - name: "NAVTTC Career & Skills Programs"
+      type: "skills_portal"
+      city: "Islamabad"
+      url: "https://navttc.gov.pk/careers/"
+      manual_url: "https://navttc.gov.pk/"
+      enabled: true
+
+    # Rozee.pk search feeds
+    - name: "Rozee.pk Education & Tech Jobs"
+      type: "portal_search"
+      url: "https://www.rozee.pk/jobs-in-lahore"
+      city: "Lahore"
+      manual_url: "https://www.rozee.pk/"
+      enabled: true
+
+  # Email alert parsing via IMAP (Rozee, Indeed, LinkedIn alerts sent to mailbox)
+  imap_email_alerts:
+    enabled: false  # Can be enabled when credentials provided in .env
+    folder: "INBOX"
+    filter_subjects:
+      - "Job Alert"
+      - "Rozee Job Alert"
+      - "Indeed Alert"
+      - "LinkedIn Job Alert"
+      - "New jobs for"
+      - "Remote AI"
+
+  # Legal Public Remote & AI Automation Feeds
+  remote_sources:
+    - name: "RemoteOK AI & Automation"
+      type: "remote_api"
+      url: "https://remoteok.com/api"
+      category: "remote_ai"
+      enabled: true
+    - name: "Remotive Software & AI"
+      type: "remote_api"
+      url: "https://remotive.com/api/remote-jobs?category=software-dev"
+      category: "remote_ai"
+      enabled: true
+    - name: "Jobicy Remote AI Jobs"
+      type: "remote_api"
+      url: "https://jobicy.com/api/v2/remote-jobs?count=20&tag=ai"
+      category: "remote_ai"
+      enabled: true
+    - name: "We Work Remotely - Backend Programming"
+      type: "remote_rss"
+      url: "https://weworkremotely.com/categories/remote-back-end-programming-jobs.rss"
+      category: "remote_ai"
+      enabled: true
+    - name: "We Work Remotely - Full-Stack Programming"
+      type: "remote_rss"
+      url: "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss"
+      category: "remote_ai"
+      enabled: true
+

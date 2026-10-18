@@ -1,0 +1,102 @@
+DEVRESEARCH DAILY BRIEFING
+{{ date_str }}
+================================================================================
+
+TODAY IN BRIEF:
+{% for line in today_in_brief %}
+- {{ line }}
+{% endfor %}
+
+--------------------------------------------------------------------------------
+1. AI & LLM INDUSTRY NEWS
+--------------------------------------------------------------------------------
+{% for item in ai_items %}
+* {{ item.title }}
+  Source: {{ item.source_name }} | Score: {{ item.score }}/100
+  {{ item.summary }}
+  Why it matters to you: {{ item.why_it_matters }}
+  Link: {{ item.url }}
+
+{% endfor %}
+
+--------------------------------------------------------------------------------
+2. SOFTWARE & CLOUD DEVELOPMENT
+--------------------------------------------------------------------------------
+{% for item in dev_items %}
+* {{ item.title }}
+  Source: {{ item.source_name }} | Score: {{ item.score }}/100
+  {{ item.summary }}
+  Why it matters to you: {{ item.why_it_matters }}
+  Link: {{ item.url }}
+
+{% endfor %}
+
+--------------------------------------------------------------------------------
+3. RESEARCH WATCH & OPEN GAPS
+--------------------------------------------------------------------------------
+{% for item in research_items %}
+* {{ item.title }}
+  Source: {{ item.source_name }} | Score: {{ item.score }}/100
+  {{ item.summary }}
+  Relevance: {{ item.why_it_matters }}
+  {% if item.research_gap %}Possible research gap / opportunity: {{ item.research_gap }}{% endif %}
+  Link: {{ item.url }}
+
+{% endfor %}
+
+--------------------------------------------------------------------------------
+4. JOBS FOR YOU (PAKISTAN: LAHORE & GUJRANWALA FIRST)
+--------------------------------------------------------------------------------
+{% if new_jobs %}
+{% for job in new_jobs %}
+* [{{ job.eligibility_status }}] {{ job.title }}
+  Organization: {{ job.organization }} | City: {{ job.city }} | Deadline: {{ job.deadline }}
+  Eligibility: {{ job.eligibility_reason }}
+  Apply: {{ job.apply_link or job.primary_url }}
+  Original Source: {{ job.primary_url }}
+
+{% endfor %}
+{% else %}
+No new matching openings were posted in the last 24 hours.
+{% endif %}
+
+{% if closing_soon_jobs %}
+CLOSING SOON (NEXT 5 DAYS):
+{% for cs in closing_soon_jobs %}
+- {{ cs.title }} | {{ cs.organization }} ({{ cs.city }}) | Deadline: {{ cs.deadline }}
+  Apply: {{ cs.apply_link or cs.primary_url }}
+{% endfor %}
+{% endif %}
+
+--------------------------------------------------------------------------------
+5. REMOTE & AI-AUTOMATION JOBS (WORLDWIDE & OPEN TO PAKISTAN)
+--------------------------------------------------------------------------------
+{% if remote_ai_jobs %}
+{% for rjob in remote_ai_jobs %}
+* [{{ rjob.eligibility_status }}] {{ rjob.title }}
+  Company: {{ rjob.organization }} | Location: Worldwide Remote | Score: {{ rjob.relevance_score }}/100
+  Eligibility & Region: {{ rjob.eligibility_reason }}
+  Apply: {{ rjob.apply_link or rjob.primary_url }}
+
+{% endfor %}
+{% else %}
+No new remote AI jobs logged in the last 24 hours.
+{% endif %}
+
+--------------------------------------------------------------------------------
+6. QUOTE OF THE DAY
+--------------------------------------------------------------------------------
+"{{ quote.text }}"
+-- {{ quote.author }} ({{ quote.show or 'Interview Archive' }})
+
+{% if read_later_items %}
+--------------------------------------------------------------------------------
+6. READ LATER LIST
+--------------------------------------------------------------------------------
+{% for r in read_later_items %}
+- {{ r.title }} ({{ r.source_name }}): {{ r.url }}
+{% endfor %}
+{% endif %}
+
+================================================================================
+Sent by DevResearch Daily Briefing (Asia/Karachi 10:00 AM)

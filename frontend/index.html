@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevResearch Daily Briefing &mdash; Dashboard</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .tab-active {
+      border-bottom: 2px solid #0284c7;
+      color: #0284c7 !important;
+      font-weight: 600;
+    }
+    .dark .tab-active {
+      border-bottom: 2px solid #38bdf8;
+      color: #38bdf8 !important;
+    }
+    [x-cloak] { display: none !important; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-150">
+
+  <!-- Notification Toast Container -->
+  <div id="toast" class="fixed top-5 right-5 z-50 transform transition-all duration-300 translate-y-[-100px] opacity-0 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-slate-700 dark:border-slate-200">
+    <i data-lucide="info" class="w-5 h-5 text-sky-400 dark:text-sky-600"></i>
+    <span id="toast-message" class="text-sm font-medium">Notification</span>
+  </div>
+
+  <!-- Header -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-brand-600 text-white p-2 rounded-xl flex items-center justify-center shadow-md shadow-brand-500/20">
+          <i data-lucide="newspaper" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+            DevResearch Daily
+            <span class="text-xs bg-brand-100 text-brand-700 dark:bg-brand-900/50 dark:text-brand-300 px-2 py-0.5 rounded-full font-semibold">Briefing</span>
+          </h1>
+          <p class="text-xs text-slate-500 dark:text-slate-400" id="header-date">Today's Digest</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons & Theme Toggle -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button onclick="triggerPipeline()" id="btn-run-pipeline" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-brand-600 hover:bg-brand-700 text-white shadow-sm transition">
+          <i data-lucide="play" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Run Pipeline Now</span>
+        </button>
+
+        <button onclick="sendTestEmail()" id="btn-test-email" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Send Test Email</span>
+        </button>
+
+        <button onclick="toggleTheme()" class="p-2 rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <i data-lucide="moon" id="theme-icon" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-8 overflow-x-auto text-sm text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800/50">
+      <button onclick="switchTab('today')" id="tab-btn-today" class="py-3 px-1 hover:text-slate-900 dark:hover:text-white tab-active flex items-center gap-2">
+        <i data-lucide="calendar" class="w-4 h-4"></i> Today
+      </button>
+      <button onclick="switchTab('history')" id="tab-btn-history" class="py-3 px-1 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
+        <i data-lucide="archive" class="w-4 h-4"></i> History
+      </button>
+      <button onclick="switchTab('research-gaps')" id="tab-btn-research-gaps" class="py-3 px-1 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
+        <i data-lucide="lightbulb" class="w-4 h-4"></i> Research Gaps
+      </button>
+      <button onclick="switchTab('jobs')" id="tab-btn-jobs" class="py-3 px-1 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
+        <i data-lucide="briefcase" class="w-4 h-4"></i> Jobs Watch
+      </button>
+      <button onclick="switchTab('settings')" id="tab-btn-settings" class="py-3 px-1 hover:text-slate-900 dark:hover:text-white flex items-center gap-2">
+        <i data-lucide="settings" class="w-4 h-4"></i> Settings
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+
+    <!-- ==================================================================== -->
+    <!-- TAB 1: TODAY -->
+    <!-- ==================================================================== -->
+    <section id="tab-today" class="space-y-8">
+      <!-- Top Metric Counter Pills -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-sky-100 dark:bg-sky-950/60 text-sky-600 dark:text-sky-400">
+            <i data-lucide="bot" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">AI &amp; LLM</p>
+            <p class="text-lg font-bold" id="stat-ai">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+            <i data-lucide="cloud" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Dev &amp; Cloud</p>
+            <p class="text-lg font-bold" id="stat-dev">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400">
+            <i data-lucide="atom" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Research Watch</p>
+            <p class="text-lg font-bold" id="stat-research">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+          <div class="p-2.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
+            <i data-lucide="map-pin" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Top Jobs</p>
+            <p class="text-lg font-bold" id="stat-jobs">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Container -->
+      <div class="space-y-10" id="today-categories-container">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- TAB 2: HISTORY & SEARCH -->
+    <!-- ==================================================================== -->
+    <section id="tab-history" class="hidden space-y-6">
+      <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col md:flex-row gap-4">
+        <div class="flex-1 relative">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+          <input type="text" id="history-search" placeholder="Search briefing items, topics, or keywords..." oninput="debounce(loadHistory, 300)()" class="w-full pl-10 pr-4 py-2 text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500">
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <select id="history-category" onchange="loadHistory()" class="text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2">
+            <option value="all">All Categories</option>
+            <option value="ai_llm">AI &amp; LLM News</option>
+            <option value="software_cloud">Dev &amp; Cloud</option>
+            <option value="research_watch">Research Watch</option>
+          </select>
+          <label class="flex items-center gap-2 text-xs font-medium cursor-pointer">
+            <input type="checkbox" id="history-read-later" onchange="loadHistory()" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+            Read Later Only
+          </label>
+        </div>
+      </div>
+
+      <div id="history-container" class="space-y-4">
+        <!-- Populated via loadHistory -->
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- TAB 3: RESEARCH GAPS BOARD -->
+    <!-- ==================================================================== -->
+    <section id="tab-research-gaps" class="hidden space-y-6">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold">Research Gaps &amp; Ideas Board</h2>
+          <p class="text-sm text-slate-500">Continuously curated research opportunities across Quantum Computing, NLP, LLMs, and emerging ML.</p>
+        </div>
+      </div>
+      <div id="gaps-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Populated via loadResearchGaps -->
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- TAB 4: JOBS WATCH & TRACKER -->
+    <!-- ==================================================================== -->
+    <section id="tab-jobs" class="hidden space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold flex items-center gap-2">
+            Pakistan Job Opportunities
+            <span class="text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 px-2 py-0.5 rounded-md font-semibold">Lahore &amp; Gujranwala First</span>
+          </h2>
+          <p class="text-sm text-slate-500">Eligibility automatically recalculated against your MS CS Lecturer &amp; Placement profile.</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <select id="filter-job-city" onchange="loadJobs()" class="text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2">
+            <option value="all">All Cities</option>
+            <option value="Lahore">Lahore</option>
+            <option value="Gujranwala">Gujranwala</option>
+            <option value="Gujrat">Gujrat</option>
+            <option value="Sialkot">Sialkot</option>
+            <option value="Islamabad">Islamabad</option>
+            <option value="Remote">Remote</option>
+          </select>
+
+          <select id="filter-job-eligibility" onchange="loadJobs()" class="text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2">
+            <option value="all">All Statuses</option>
+            <option value="ELIGIBLE">Eligible Only</option>
+            <option value="MAYBE">Maybe (Clarification Needed)</option>
+            <option value="NOT ELIGIBLE">Not Eligible</option>
+          </select>
+
+          <select id="filter-job-stage" onchange="loadJobs()" class="text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg px-3 py-2">
+            <option value="all">All Stages</option>
+            <option value="Saved">Saved</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Offer">Offer</option>
+          </select>
+
+          <label class="flex items-center gap-2 text-xs font-medium cursor-pointer text-slate-600 dark:text-slate-400">
+            <input type="checkbox" id="show-not-eligible-toggle" onchange="loadJobs()" class="rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+            Show Not Eligible
+          </label>
+        </div>
+      </div>
+
+      <!-- Closing Soon Banner (if any) -->
+      <div id="closing-soon-banner" class="hidden bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 rounded-xl p-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-rose-700 dark:text-rose-400 flex items-center gap-1.5 mb-2">
+          <i data-lucide="clock" class="w-4 h-4"></i> Closing Soon (Next 5 Days)
+        </h4>
+        <div id="closing-soon-list" class="space-y-2"></div>
+      </div>
+
+      <!-- Jobs Cards Container -->
+      <div id="jobs-container" class="space-y-4">
+        <!-- Populated via loadJobs -->
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- TAB 5: SETTINGS -->
+    <!-- ==================================================================== -->
+    <section id="tab-settings" class="hidden space-y-8">
+      <div>
+        <h2 class="text-xl font-bold">Preferences &amp; User Profile</h2>
+        <p class="text-sm text-slate-500">Update your qualifications, age, experience, delivery schedule, and sources without editing code.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Profile Card -->
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+          <h3 class="text-md font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="user" class="w-4 h-4 text-brand-600"></i> User Profile (Recalculates Eligibility)
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Education Degree</label>
+              <input type="text" id="setting-degree" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Date of Birth (Auto Age)</label>
+              <input type="date" id="setting-dob" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+              <span class="text-xs text-brand-600 font-semibold" id="setting-calculated-age">Current Age: 28</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Teaching Exp (Yrs)</label>
+              <input type="number" step="0.5" id="setting-exp-teaching" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Industry Exp (Yrs)</label>
+              <input type="number" step="0.5" id="setting-exp-industry" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Placement Exp (Yrs)</label>
+              <input type="number" step="0.5" id="setting-exp-placement" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1">Priority Locations (Comma Separated)</label>
+            <input type="text" id="setting-tier1-cities" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+          </div>
+
+          <button onclick="saveProfileSettings()" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm rounded-lg shadow-sm transition">
+            Save Profile &amp; Recalculate Job Eligibility
+          </button>
+        </div>
+
+        <!-- Delivery & Automation Card -->
+        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+          <h3 class="text-md font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i data-lucide="send" class="w-4 h-4 text-brand-600"></i> Delivery &amp; Scheduler Schedule
+          </h3>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Daily Delivery Time</label>
+              <input type="time" id="setting-delivery-time" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-slate-500 mb-1">Timezone</label>
+              <input type="text" id="setting-timezone" value="Asia/Karachi" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1">Recipient Emails (Comma Separated)</label>
+            <input type="text" id="setting-recipients" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+          </div>
+
+          <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1">Mail Provider</label>
+            <select id="setting-mail-provider" class="w-full text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-2.5">
+              <option value="console">Console (Dev/Test mode)</option>
+              <option value="smtp">SMTP (e.g. Gmail App Password)</option>
+              <option value="resend">Resend API</option>
+              <option value="sendgrid">SendGrid API</option>
+            </select>
+          </div>
+
+          <button onclick="saveDeliverySettings()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 text-white font-semibold text-sm rounded-lg shadow-sm transition">
+            Save Schedule &amp; Delivery Settings
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Script Application Logic -->
+  <script>
+    // State
+    let currentTab = 'today';
+    let profileData = null;
+    let debounceTimer = null;
+
+    function debounce(func, timeout = 300) {
+      return (...args) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => { func.apply(this, args); }, timeout);
+      };
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').innerText = msg;
+      toast.classList.remove('translate-y-[-100px]', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-[-100px]', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 4000);
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcon(isDark);
+    }
+
+    function updateThemeIcon(isDark) {
+      const icon = document.getElementById('theme-icon');
+      if (isDark) {
+        icon.setAttribute('data-lucide', 'sun');
+      } else {
+        icon.setAttribute('data-lucide', 'moon');
+      }
+      lucide.createIcons();
+    }
+
+    function switchTab(tabId) {
+      currentTab = tabId;
+      ['today', 'history', 'research-gaps', 'jobs', 'settings'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`tab-btn-${t}`).classList.remove('tab-active');
+      });
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+      document.getElementById(`tab-btn-${tabId}`).classList.add('tab-active');
+
+      if (tabId === 'today') loadToday();
+      else if (tabId === 'history') loadHistory();
+      else if (tabId === 'research-gaps') loadResearchGaps();
+      else if (tabId === 'jobs') loadJobs();
+      else if (tabId === 'settings') loadSettings();
+    }
+
+    // Tab 1: Today
+    async function loadToday() {
+      try {
+        const res = await fetch('/api/digest/today');
+        const data = await res.json();
+        document.getElementById('header-date').innerText = data.date;
+        document.getElementById('stat-ai').innerText = data.counts.ai;
+        document.getElementById('stat-dev').innerText = data.counts.dev;
+        document.getElementById('stat-research').innerText = data.counts.research;
+        document.getElementById('stat-jobs').innerText = data.counts.jobs;
+
+        const container = document.getElementById('today-categories-container');
+        container.innerHTML = `
+          ${renderCategorySection('AI & LLM Industry News', data.ai_items, 'bot')}
+          ${renderCategorySection('Software & Cloud Development', data.dev_items, 'cloud')}
+          ${renderCategorySection('Research Watch & Open Opportunities', data.research_items, 'atom')}
+        `;
+        lucide.createIcons();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderCategorySection(title, items, iconName) {
+      if (!items || items.length === 0) {
+        return `
+          <div>
+            <h3 class="text-md font-bold mb-3 flex items-center gap-2">
+              <i data-lucide="${iconName}" class="w-5 h-5 text-brand-600"></i> ${title}
+            </h3>
+            <p class="text-sm text-slate-500 italic bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800">No items available yet. Click "Run Pipeline Now" to gather live updates.</p>
+          </div>
+        `;
+      }
+      return `
+        <div>
+          <h3 class="text-md font-bold mb-4 flex items-center gap-2 text-slate-900 dark:text-white">
+            <i data-lucide="${iconName}" class="w-5 h-5 text-brand-600"></i> ${title}
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            ${items.map(renderItemCard).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderItemCard(item) {
+      return `
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-3 hover:border-brand-500/50 transition">
+          <div class="space-y-2">
+            <div class="flex items-start justify-between gap-3">
+              <a href="${item.url}" target="_blank" class="text-sm font-semibold hover:text-brand-600 dark:hover:text-brand-400 leading-snug">
+                ${item.title}
+              </a>
+              <button onclick="toggleReadLater(${item.id})" class="text-slate-400 hover:text-amber-500">
+                <i data-lucide="bookmark" class="w-4 h-4 ${item.read_later ? 'text-amber-500 fill-amber-500' : ''}"></i>
+              </button>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <span>${item.source_name}</span>
+              <span>&bull;</span>
+              <span class="bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded font-medium text-slate-600 dark:text-slate-300">Score: ${item.score}/100</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${item.summary}</p>
+          </div>
+
+          ${item.why_it_matters ? `
+            <div class="text-xs p-2.5 rounded-lg bg-sky-50 dark:bg-sky-950/40 border border-sky-100 dark:border-sky-900/50 text-sky-800 dark:text-sky-300">
+              <strong>Why it matters:</strong> ${item.why_it_matters}
+            </div>
+          ` : ''}
+
+          ${item.research_gap ? `
+            <div class="text-xs p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/50 text-amber-900 dark:text-amber-300">
+              <strong>Research Gap:</strong> ${item.research_gap}
+            </div>
+          ` : ''}
+
+          <div class="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
+            <a href="${item.url}" target="_blank" class="text-brand-600 dark:text-brand-400 font-semibold hover:underline inline-flex items-center gap-1">
+              Read Original <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    async function toggleReadLater(id) {
+      try {
+        const res = await fetch(`/api/news/${id}/read-later`, { method: 'POST' });
+        const data = await res.json();
+        showToast(data.read_later ? "Saved to Read Later!" : "Removed from Read Later.");
+        if (currentTab === 'today') loadToday();
+        else if (currentTab === 'history') loadHistory();
+      } catch (err) {
+        showToast("Error toggling bookmark");
+      }
+    }
+
+    // Tab 2: History
+    async function loadHistory() {
+      const q = document.getElementById('history-search').value;
+      const cat = document.getElementById('history-category').value;
+      const readLater = document.getElementById('history-read-later').checked;
+
+      const params = new URLSearchParams();
+      if (q) params.set('q', q);
+      if (cat !== 'all') params.set('category', cat);
+      if (readLater) params.set('only_read_later', 'true');
+
+      const res = await fetch(`/api/digest/history?${params.toString()}`);
+      const data = await res.json();
+      const container = document.getElementById('history-container');
+      if (data.items.length === 0) {
+        container.innerHTML = '<p class="text-sm text-slate-500 italic p-6 text-center">No history matching search criteria.</p>';
+        return;
+      }
+      container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">${data.items.map(renderItemCard).join('')}</div>`;
+      lucide.createIcons();
+    }
+
+    // Tab 3: Research Gaps
+    async function loadResearchGaps() {
+      const res = await fetch('/api/research-gaps');
+      const data = await res.json();
+      const container = document.getElementById('gaps-container');
+      if (data.gaps.length === 0) {
+        container.innerHTML = '<p class="col-span-3 text-sm text-slate-500 italic p-6 text-center">No research gaps logged yet.</p>';
+        return;
+      }
+      container.innerHTML = data.gaps.map(g => `
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 px-2 py-0.5 rounded font-semibold">${g.topic}</span>
+              <span class="text-xs text-slate-400 uppercase font-semibold">${g.status}</span>
+            </div>
+            <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-2">${g.title}</h4>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">${g.gap_description}</p>
+          </div>
+          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-400">
+            <span>Tags: ${g.tags.join(', ')}</span>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Tab 4: Jobs Watch
+    async function loadJobs() {
+      const city = document.getElementById('filter-job-city').value;
+      const eligibility = document.getElementById('filter-job-eligibility').value;
+      const stage = document.getElementById('filter-job-stage').value;
+      const showNotEligible = document.getElementById('show-not-eligible-toggle').checked;
+
+      const params = new URLSearchParams();
+      if (city !== 'all') params.set('city', city);
+      if (eligibility !== 'all') params.set('eligibility_status', eligibility);
+      if (stage !== 'all') params.set('stage', stage);
+      if (showNotEligible) params.set('include_not_eligible', 'true');
+
+      const res = await fetch(`/api/jobs?${params.toString()}`);
+      const data = await res.json();
+
+      // Closing Soon
+      const csBanner = document.getElementById('closing-soon-banner');
+      const csList = document.getElementById('closing-soon-list');
+      if (data.closing_soon && data.closing_soon.length > 0) {
+        csBanner.classList.remove('hidden');
+        csList.innerHTML = data.closing_soon.map(cs => `
+          <div class="text-xs text-rose-900 dark:text-rose-200 flex items-center justify-between">
+            <span><strong>${cs.title}</strong> &bull; ${cs.organization} (${cs.city}) &bull; Deadline: <strong>${cs.deadline}</strong></span>
+            <a href="${cs.apply_link || cs.primary_url}" target="_blank" class="underline font-semibold ml-2">Apply &rarr;</a>
+          </div>
+        `).join('');
+      } else {
+        csBanner.classList.add('hidden');
+      }
+
+      const container = document.getElementById('jobs-container');
+      if (data.jobs.length === 0) {
+        container.innerHTML = '<p class="text-sm text-slate-500 italic p-6 text-center">No jobs matching current filters.</p>';
+        return;
+      }
+
+      container.innerHTML = data.jobs.map(j => {
+        let badgeColor = 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300';
+        if (j.eligibility_status === 'MAYBE') badgeColor = 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300';
+        else if (j.eligibility_status === 'NOT ELIGIBLE') badgeColor = 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300';
+
+        return `
+          <div class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+              <div>
+                <h4 class="text-md font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <a href="${j.apply_link || j.primary_url}" target="_blank" class="hover:text-brand-600">${j.title}</a>
+                </h4>
+                <div class="text-xs text-slate-500 mt-1 flex flex-wrap items-center gap-2">
+                  <span class="font-semibold text-slate-700 dark:text-slate-300">${j.organization}</span>
+                  <span>&bull;</span>
+                  <span class="bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">${j.city}</span>
+                  <span>&bull;</span>
+                  <span>Deadline: <strong class="text-slate-700 dark:text-slate-300">${j.deadline}</strong></span>
+                  <span>&bull;</span>
+                  <span>Score: <strong class="text-brand-600 font-bold">${j.relevance_score}/100</strong></span>
+                </div>
+              </div>
+              <div>
+                <span class="px-2.5 py-1 text-xs font-bold rounded-lg ${badgeColor}">${j.eligibility_status}</span>
+              </div>
+            </div>
+
+            <!-- Reason Box -->
+            <div class="text-xs p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">
+              <strong>Eligibility Check:</strong> ${j.eligibility_reason}
+            </div>
+
+            <!-- Tracker & Action Links -->
+            <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-slate-500">Application Stage:</span>
+                <select onchange="updateJobStage(${j.id}, this.value)" class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded px-2 py-1 font-semibold text-slate-800 dark:text-slate-200">
+                  <option value="Saved" ${j.application_stage === 'Saved' ? 'selected' : ''}>Saved</option>
+                  <option value="Applied" ${j.application_stage === 'Applied' ? 'selected' : ''}>Applied</option>
+                  <option value="Interview" ${j.application_stage === 'Interview' ? 'selected' : ''}>Interview</option>
+                  <option value="Rejected" ${j.application_stage === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                  <option value="Offer" ${j.application_stage === 'Offer' ? 'selected' : ''}>Offer</option>
+                </select>
+              </div>
+
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="openApplyAssistant(${j.id})" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded font-semibold inline-flex items-center gap-1.5 shadow-sm transition">
+                  <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Apply Assistant
+                </button>
+                <a href="${j.apply_link || j.primary_url}" target="_blank" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 text-white rounded font-semibold inline-flex items-center gap-1">
+                  Apply / View <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                </a>
+                <a href="${j.primary_url}" target="_blank" class="text-slate-500 hover:underline">
+                  Original Source
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    async function updateJobStage(jobId, stage) {
+      try {
+        const res = await fetch(`/api/jobs/${jobId}/stage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ stage: stage })
+        });
+        if (res.ok) {
+          showToast(`Job stage updated to "${stage}"!`);
+        }
+      } catch (err) {
+        showToast("Error updating job stage.");
+      }
+    }
+
+    // Tab 5: Settings
+    async function loadSettings() {
+      const res = await fetch('/api/settings');
+      const data = await res.json();
+      profileData = data.profile;
+
+      document.getElementById('setting-degree').value = profileData.education.degree || '';
+      document.getElementById('setting-dob').value = profileData.personal.birth_date || '1998-05-15';
+      document.getElementById('setting-exp-teaching').value = profileData.experience_years.teaching || 3.5;
+      document.getElementById('setting-exp-industry').value = profileData.experience_years.industry || 2.5;
+      document.getElementById('setting-exp-placement').value = profileData.experience_years.placement_and_training || 2.0;
+      document.getElementById('setting-tier1-cities').value = (profileData.locations.tier_1 || []).join(', ');
+
+      document.getElementById('setting-delivery-time').value = data.delivery.digest_time || '10:00';
+      document.getElementById('setting-timezone').value = data.delivery.timezone || 'Asia/Karachi';
+      document.getElementById('setting-recipients').value = data.delivery.mail_recipients || '';
+      document.getElementById('setting-mail-provider').value = data.delivery.mail_provider || 'console';
+    }
+
+    async function saveProfileSettings() {
+      if (!profileData) return;
+      profileData.education.degree = document.getElementById('setting-degree').value;
+      profileData.personal.birth_date = document.getElementById('setting-dob').value;
+      profileData.experience_years.teaching = parseFloat(document.getElementById('setting-exp-teaching').value);
+      profileData.experience_years.industry = parseFloat(document.getElementById('setting-exp-industry').value);
+      profileData.experience_years.placement_and_training = parseFloat(document.getElementById('setting-exp-placement').value);
+      profileData.locations.tier_1 = document.getElementById('setting-tier1-cities').value.split(',').map(s => s.trim());
+
+      try {
+        const res = await fetch('/api/settings/profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(profileData)
+        });
+        const result = await res.json();
+        showToast(result.message);
+        document.getElementById('setting-calculated-age').innerText = `Current Age: ${result.calculated_age}`;
+      } catch (err) {
+        showToast("Failed to save profile settings.");
+      }
+    }
+
+    async function saveDeliverySettings() {
+      const payload = {
+        digest_time: document.getElementById('setting-delivery-time').value,
+        timezone: document.getElementById('setting-timezone').value,
+        mail_recipients: document.getElementById('setting-recipients').value,
+        mail_provider: document.getElementById('setting-mail-provider').value
+      };
+      try {
+        const res = await fetch('/api/settings/delivery', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        showToast(result.message);
+      } catch (err) {
+        showToast("Failed to save delivery settings.");
+      }
+    }
+
+    async function triggerPipeline() {
+      const btn = document.getElementById('btn-run-pipeline');
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> Running...';
+      lucide.createIcons();
+
+      try {
+        const res = await fetch('/api/pipeline/run', { method: 'POST' });
+        const result = await res.json();
+        showToast(result.message);
+        setTimeout(() => {
+          loadToday();
+          btn.disabled = false;
+          btn.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Run Pipeline Now</span>';
+          lucide.createIcons();
+        }, 3000);
+      } catch (err) {
+        showToast("Pipeline error occurred.");
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Run Pipeline Now</span>';
+        lucide.createIcons();
+      }
+    }
+
+    async function sendTestEmail() {
+      const btn = document.getElementById('btn-test-email');
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> Sending...';
+      lucide.createIcons();
+
+      try {
+        const res = await fetch('/api/email/test', { method: 'POST' });
+        const result = await res.json();
+        showToast(result.message);
+      } catch (err) {
+        showToast("Error sending test email.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="mail" class="w-3.5 h-3.5"></i> <span class="hidden sm:inline">Send Test Email</span>';
+        lucide.createIcons();
+      }
+    }
+
+    // Apply Assistant Modal State & Actions
+    let currentApplyJobId = null;
+    let currentApplyData = null;
+
+    async function openApplyAssistant(jobId) {
+      currentApplyJobId = jobId;
+      const modal = document.getElementById('apply-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      document.getElementById('modal-job-title').innerText = "Loading tailored application...";
+      document.getElementById('modal-job-org').innerText = "";
+      document.getElementById('modal-cover-letter').value = "Generating tailored cover letter strictly from verified CV facts...";
+      document.getElementById('modal-matched-skills').innerHTML = "";
+      document.getElementById('modal-missing-skills').innerHTML = "";
+      document.getElementById('modal-download-cv-btn').classList.add('pointer-events-none', 'opacity-50');
+
+      try {
+        const res = await fetch(`/api/apply/${jobId}/preview`);
+        if (!res.ok) throw new Error("Failed to load application preview");
+        const data = await res.json();
+        currentApplyData = data;
+
+        document.getElementById('modal-job-title').innerText = data.job.title;
+        document.getElementById('modal-job-org').innerText = `${data.job.organization} (${data.job.city})`;
+        document.getElementById('modal-cover-letter').value = data.cover_letter;
+
+        // Render matched skills
+        const matchedContainer = document.getElementById('modal-matched-skills');
+        if (data.matched_skills && data.matched_skills.length > 0) {
+          matchedContainer.innerHTML = data.matched_skills.map(s => `
+            <span class="px-2 py-0.5 text-xs bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 rounded font-medium">&check; ${s}</span>
+          `).join('');
+        } else {
+          matchedContainer.innerHTML = '<span class="text-xs text-slate-400">Core software & teaching background aligns</span>';
+        }
+
+        // Render missing skills (truthfulness check)
+        const missingContainer = document.getElementById('modal-missing-skills');
+        if (data.missing_skills && data.missing_skills.length > 0) {
+          missingContainer.innerHTML = data.missing_skills.map(s => `
+            <span class="px-2 py-0.5 text-xs bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 rounded font-medium">&excl; Missing from CV: ${s}</span>
+          `).join('');
+        } else {
+          missingContainer.innerHTML = '<span class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">&check; Zero missing requirements flagged</span>';
+        }
+
+        // Tailored CV Download button
+        const downloadBtn = document.getElementById('modal-download-cv-btn');
+        downloadBtn.href = data.download_url;
+        downloadBtn.setAttribute('download', data.cv_filename);
+        downloadBtn.classList.remove('pointer-events-none', 'opacity-50');
+
+        // Email vs Web actions
+        const emailSection = document.getElementById('modal-email-action');
+        const webSection = document.getElementById('modal-web-action');
+        if (data.is_email_apply) {
+          emailSection.classList.remove('hidden');
+          webSection.classList.add('hidden');
+          document.getElementById('modal-target-email').innerText = data.apply_email;
+        } else {
+          emailSection.classList.add('hidden');
+          webSection.classList.remove('hidden');
+          document.getElementById('modal-web-link').href = data.job.apply_link || data.job.primary_url;
+        }
+
+        lucide.createIcons();
+      } catch (err) {
+        showToast("Error generating application preview: " + err.message);
+      }
+    }
+
+    function closeApplyModal() {
+      const modal = document.getElementById('apply-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function copyCoverLetter() {
+      const text = document.getElementById('modal-cover-letter').value;
+      navigator.clipboard.writeText(text);
+      showToast("Cover letter copied to clipboard!");
+    }
+
+    async function launchBrowserAssist() {
+      if (!currentApplyJobId) return;
+      showToast("Launching visible desktop browser assistant...");
+      try {
+        const res = await fetch(`/api/apply/${currentApplyJobId}/browser-fill`, { method: 'POST' });
+        const result = await res.json();
+        showToast(result.message);
+      } catch (err) {
+        showToast("Error launching browser assistant.");
+      }
+    }
+
+    async function sendApplicationEmailConfirm() {
+      if (!currentApplyJobId) return;
+      if (!confirm("Confirm sending your application email with the tailored CV attached?")) return;
+      showToast("Sending application email...");
+      try {
+        const res = await fetch(`/api/apply/${currentApplyJobId}/send-email`, { method: 'POST' });
+        const result = await res.json();
+        showToast(result.message);
+        if (result.success) {
+          updateJobStage(currentApplyJobId, 'Applied');
+          loadJobs();
+        }
+      } catch (err) {
+        showToast("Error dispatching application email.");
+      }
+    }
+
+    async function markCurrentJobApplied() {
+      if (!currentApplyJobId) return;
+      await updateJobStage(currentApplyJobId, 'Applied');
+      showToast("Job marked as Applied in Tracker!");
+      closeApplyModal();
+      loadJobs();
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        updateThemeIcon(true);
+      } else {
+        updateThemeIcon(false);
+      }
+      lucide.createIcons();
+      loadToday();
+    });
+  </script>
+
+  <!-- Apply Assistant Interactive Modal -->
+  <div id="apply-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between bg-slate-50/50 dark:bg-slate-800/30">
+        <div>
+          <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> DevResearch Apply Assistant
+          </span>
+          <h3 id="modal-job-title" class="text-lg font-bold text-slate-900 dark:text-white mt-1">Job Title</h3>
+          <p id="modal-job-org" class="text-xs text-slate-500">Organization &bull; Location</p>
+        </div>
+        <button onclick="closeApplyModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-6 space-y-5 overflow-y-auto flex-1 text-sm">
+        <!-- Truthfulness & Skills Alignment Box -->
+        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-2">
+          <div class="flex items-center justify-between text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <span>CV Fact Verification &amp; Skill Alignment</span>
+            <span class="text-emerald-600 dark:text-emerald-400">&check; Truthful to CV</span>
+          </div>
+          <div class="space-y-1.5">
+            <div class="text-xs text-slate-500">Matched Skills:</div>
+            <div id="modal-matched-skills" class="flex flex-wrap gap-1.5"></div>
+            <div class="text-xs text-slate-500 pt-1">Flagged Missing Criteria (Not Claimed):</div>
+            <div id="modal-missing-skills" class="flex flex-wrap gap-1.5"></div>
+          </div>
+        </div>
+
+        <!-- Tailored Cover Letter -->
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-slate-700 dark:text-slate-300">
+              Tailored Cover Letter (150&ndash;250 words)
+            </label>
+            <button onclick="copyCoverLetter()" class="text-xs font-semibold text-brand-600 hover:text-brand-700 inline-flex items-center gap-1">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Text
+            </button>
+          </div>
+          <textarea id="modal-cover-letter" rows="8" class="w-full text-xs font-mono p-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-500"></textarea>
+          <p class="text-xs text-slate-400">Strictly uses facts from your parsed CV. Feel free to edit prior to submission.</p>
+        </div>
+
+        <!-- Tailored PDF CV Download -->
+        <div class="flex items-center justify-between p-4 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40">
+          <div>
+            <div class="text-xs font-bold text-indigo-900 dark:text-indigo-300">Job-Specific Tailored CV (PDF)</div>
+            <div class="text-xs text-indigo-700 dark:text-indigo-400 mt-0.5">Formatted for ATS readability with prioritized highlights.</div>
+          </div>
+          <a id="modal-download-cv-btn" href="#" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg inline-flex items-center gap-1.5 shadow-sm transition">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Download PDF
+          </a>
+        </div>
+      </div>
+
+      <!-- Modal Footer Action Controls -->
+      <div class="p-6 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div>
+          <button onclick="markCurrentJobApplied()" class="text-slate-600 dark:text-slate-400 hover:underline font-semibold">
+            Mark as Applied in Tracker &rarr;
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Email Application Controls -->
+          <div id="modal-email-action" class="hidden flex items-center gap-2">
+            <span class="text-slate-500">To: <strong id="modal-target-email"></strong></span>
+            <button onclick="sendApplicationEmailConfirm()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg inline-flex items-center gap-1.5 shadow-sm transition">
+              <i data-lucide="send" class="w-3.5 h-3.5"></i> Confirm &amp; Send Email
+            </button>
+          </div>
+
+          <!-- Web Application Controls -->
+          <div id="modal-web-action" class="hidden flex items-center gap-2">
+            <button onclick="launchBrowserAssist()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg inline-flex items-center gap-1.5 shadow-sm transition">
+              <i data-lucide="compass" class="w-3.5 h-3.5"></i> Launch Browser Assist (Visible)
+            </button>
+            <a id="modal-web-link" href="#" target="_blank" class="px-3.5 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold rounded-lg inline-flex items-center gap-1">
+              Open Form <i data-lucide="external-link" class="w-3 h-3"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

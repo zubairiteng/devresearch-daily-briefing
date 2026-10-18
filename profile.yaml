@@ -1,0 +1,88 @@
+personal:
+  name: Dr./Prof. Dev Researcher
+  birth_date: '1998-05-15'
+  email: user@example.com
+education:
+  degree: MS Computer Science
+  level: MS/MPhil
+  field: Computer Science
+  relevant_subjects:
+  - Artificial Intelligence
+  - Machine Learning
+  - Natural Language Processing
+  - Deep Learning
+  - Programming Fundamentals
+  - Data Structures & Algorithms
+  - Cloud Computing
+roles:
+- University Lecturer
+- Placement Officer
+- NAVTTC Trainer / Skills Coordinator
+- Full-Stack Developer
+- AI Researcher
+experience_years:
+  teaching: 3.5
+  industry: 2.5
+  placement_and_training: 2.0
+  total: 4.5
+locations:
+  tier_1:
+  - Lahore
+  - Gujranwala
+  tier_2:
+  - Sialkot
+  - Gujrat
+  - Islamabad
+  tier_3:
+  - Remote
+  - Hybrid
+research_interests:
+  primary:
+  - Quantum Computing
+  - Natural Language Processing (NLP)
+  - Large Language Models (LLMs)
+  topics_of_interest:
+  - Quantum algorithms and hardware benchmarks
+  - Reasoning and agentic workflows in LLMs
+  - Efficient fine-tuning, quantization, and edge deployment
+  - RAG, retrieval architectures, and vector search
+  - Open research gaps suitable for conference/journal publication
+job_preferences:
+  target_roles:
+  - Lecturer
+  - Assistant Professor
+  - Visiting Faculty
+  - Research Associate
+  - Lab Engineer
+  - Placement Officer
+  - Career Counselor
+  - Industry Liaison
+  - Training Coordinator
+  - AI/ML Engineer
+  - Data Scientist
+  - NLP Engineer
+  - Full-Stack Developer
+  - Cloud Engineer
+  - Technical Trainer
+  organizations_of_interest:
+  - NAVTTC
+  - PSDA
+  - TEVTA
+  - PSDF
+  - DigiSkills
+  - e-Rozgaar
+  - Ignite
+  - PPSC
+  - FPSC
+  - HEC
+  - UET Lahore
+  - Punjab University
+  - GCU Lahore
+  - LUMS
+  - COMSATS
+  - UMT
+  - UCP
+  - FAST-NUCES
+  - Superior University
+  - University of Gujrat
+  - GIFT University Gujranwala

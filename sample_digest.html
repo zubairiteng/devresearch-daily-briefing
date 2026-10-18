@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>DevResearch Daily | Oct 18, 2026 | How Itaú is building generative AI for its entire customer base</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      supported-color-schemes: light dark;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f6f8;
+      color: #1a202c;
+    }
+    .wrapper {
+      max-width: 680px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 32px 28px;
+    }
+    .header h1 {
+      margin: 0 0 6px 0;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .header .subtitle {
+      color: #94a3b8;
+      font-size: 14px;
+      margin: 0;
+    }
+    .content {
+      padding: 28px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-top: 32px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+    }
+    .section-title:first-of-type {
+      margin-top: 0;
+    }
+    .brief-box {
+      background-color: #f8fafc;
+      border-left: 4px solid #3b82f6;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+      font-size: 15px;
+      color: #334155;
+    }
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .card-title a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+    .card-title a:hover {
+      text-decoration: underline;
+    }
+    .meta {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    .summary-text {
+      font-size: 14px;
+      color: #334155;
+      margin-bottom: 10px;
+    }
+    .why-it-matters {
+      font-size: 13px;
+      color: #0369a1;
+      background-color: #f0f9ff;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 8px;
+    }
+    .research-gap-box {
+      font-size: 13px;
+      color: #7c2d12;
+      background-color: #ffedd5;
+      border-left: 3px solid #f97316;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin-top: 8px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .badge-eligible {
+      background-color: #dcfce7;
+      color: #15803d;
+    }
+    .badge-maybe {
+      background-color: #fef3c7;
+      color: #b45309;
+    }
+    .badge-city {
+      background-color: #f1f5f9;
+      color: #475569;
+    }
+    .job-reason {
+      font-size: 12px;
+      color: #475569;
+      background-color: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+    .btn-apply {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #ffffff !important;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-right: 8px;
+    }
+    .btn-source {
+      display: inline-block;
+      font-size: 12px;
+      color: #64748b;
+      text-decoration: none;
+    }
+    .quote-box {
+      background: #faf5ff;
+      border-left: 4px solid #a855f7;
+      padding: 16px 20px;
+      border-radius: 6px;
+      margin: 24px 0;
+      font-style: italic;
+      color: #4a044e;
+    }
+    .quote-author {
+      font-weight: 600;
+      font-style: normal;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #7e22ce;
+    }
+    .footer {
+      background-color: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 20px 28px;
+      font-size: 12px;
+      color: #94a3b8;
+      text-align: center;
+    }
+    .footer a {
+      color: #64748b;
+      text-decoration: underline;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0b0f19;
+        color: #f1f5f9;
+      }
+      .wrapper {
+        background-color: #111827;
+        border-color: #1f2937;
+      }
+      .section-title {
+        color: #f8fafc;
+        border-color: #1f2937;
+      }
+      .brief-box {
+        background-color: #1e293b;
+        color: #e2e8f0;
+      }
+      .card {
+        background-color: #1f2937;
+        border-color: #374151;
+      }
+      .card-title a {
+        color: #60a5fa;
+      }
+      .summary-text {
+        color: #cbd5e1;
+      }
+      .why-it-matters {
+        background-color: #082f49;
+        color: #7dd3fc;
+      }
+      .research-gap-box {
+        background-color: #451a03;
+        color: #fdba74;
+      }
+      .job-reason {
+        background-color: #111827;
+        color: #94a3b8;
+      }
+      .quote-box {
+        background-color: #2e1065;
+        color: #f3e8ff;
+      }
+      .footer {
+        background-color: #0f172a;
+        border-color: #1e293b;
+        color: #64748b;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <h1>DevResearch Daily Briefing</h1>
+      <p class="subtitle">Sunday, October 18, 2026 &bull; Delivered for University Lecturer, Placement & AI Research Profile</p>
+    </div>
+
+    <div class="content">
+      <!-- 1. Today in brief (3 lines) -->
+      <div class="section-title">Today in Brief</div>
+      <div class="brief-box">
+        
+          <div style="margin-bottom: 6px;">&bull; AI/LLM: How Itaú is building generative AI for its entire customer base</div>
+        
+          <div style="margin-bottom: 6px;">&bull; Software &amp; Cloud: ollama/ollama Release: v0.40.6</div>
+        
+          <div style="margin-bottom: 6px;">&bull; Research: Robust Reinforcement Learning for Dynamic Treatment Regimes under Model and Measurement Uncertainty</div>
+        
+      </div>
+
+      <!-- 2. AI & LLM News -->
+      <div class="section-title">AI &amp; LLM Industry News</div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://openai.com/index/itau-generative-ai" target="_blank">How Itaú is building generative AI for its entire customer base</a>
+          </div>
+          <div class="meta">OpenAI Blog &bull; Score: 50/100</div>
+          <div class="summary-text">With ia.i, a conversational interface, and the IARA governance platform, Itaú is applying its AI First strategy to customers and employees — in one of Brazil’s most regulated sectors.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Keeps you ahead of the fast-moving tech race, from hardware bottlenecks to emerging model capabilities.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web" target="_blank">Websites are closing their doors to AI agents</a>
+          </div>
+          <div class="meta">The Verge Tech &bull; Score: 60/100</div>
+          <div class="summary-text">Autonomous agents are the hottest thing in AI. OpenAI, Meta, Google, Instinct, and others promise their agents can scour the internet on your behalf, doing anything from booking a dinner reservation and cleaning out your inbox to buying new shoes. But what happens when the rest of the internet won&#39;t play nice?</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://techcrunch.com/2026/10/17/replit-is-no-longer-working-with-anthropic-ceo-says" target="_blank">Replit makes OpenAI its default over Anthropic, CEO says</a>
+          </div>
+          <div class="meta">TechCrunch AI &bull; Score: 60/100</div>
+          <div class="summary-text">Over the weekend, Masad clarified that OpenAI would replace Anthropic as its default model provider. Claude will still be available to customers on the platform.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://llmspeed.dev" target="_blank">Llmspeed – feel how fast a local LLM runs before you buy the hardware</a>
+          </div>
+          <div class="meta">Hacker News &bull; Score: 70/100</div>
+          <div class="summary-text">Hacker News discussion (289 points). Show HN: Llmspeed – feel how fast a local LLM runs before you buy the hardware</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Keeps you ahead of the fast-moving tech race, from hardware bottlenecks to emerging model capabilities.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arstechnica.com/security/2026/10/openai-models-hacked-a-crypto-wallet-and-breached-more-websites" target="_blank">OpenAI models hacked a crypto wallet and breached more websites</a>
+          </div>
+          <div class="meta">Ars Technica &bull; Score: 70/100</div>
+          <div class="summary-text">OpenAI said internal models hacked two more websites, bypassed company-imposed browsing restrictions, and used exposed credentials to draw cryptocurrency from a wallet it couldn’t otherwise access, in the latest installment of disclosures of its agents performing unethical and likely illegal acts. The company on Thursday issued reports of four new incidents, all of which occurred in June. They come after the company revealed in July that internal test agents exploited a zero-day vulnerability in a tool designed to restrict their access to the Internet.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" target="_blank">DeepSeek-v4.1-Flash-1017</a>
+          </div>
+          <div class="meta">Anthropic News &bull; Score: 70/100</div>
+          <div class="summary-text">DeepSeek-v4.1-Flash-1017. Details announced via Anthropic News.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://api-docs.deepseek.com/guides/search" target="_blank">DeepSeek search and fetch – $0.75 per 1000 successful requests</a>
+          </div>
+          <div class="meta">Anthropic News &bull; Score: 70/100</div>
+          <div class="summary-text">DeepSeek search and fetch – $0.75 per 1000 successful requests. Details announced via Anthropic News.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://github.com/microsoft/autogen/releases/tag/python-v0.7.5" target="_blank">microsoft/autogen Release: python-v0.7.5</a>
+          </div>
+          <div class="meta">GitHub Releases &bull; Score: 75/100</div>
+          <div class="summary-text">## What&#39;s Changed * Fix docs dotnet core typo by @lach-g in https://github.com/microsoft/autogen/pull/6950 * Fix loading streaming Bedrock response with tool usage with empty argument by @pawel-dabro in https://github.com/microsoft/autogen/pull/6979 * Support linear memory in RedisMemory by @justin-cechmanek in https://github.com/microsoft/autogen/pull/6972 * Fix message ID for correlation between streaming chunks and final mes… by @smalltalkman in https://github.com/microsoft/autogen/pull/6969 * fix: extra args not work to disable thinking by @liuyunrui123 in https://github.com/microsoft/autogen/pull/7006 * Add thinking mode support for anthropic client by @SrikarMannepalli in https://github.com/microsoft/autogen/pull/7002 * Fix spurious &lt;/think&gt; tags caused by empty string reasoning_content in streaming by @Copilot in https://github.com/microsoft/autogen/pull/7025 * Fix GraphFlow cycle detection to properly clean up recursion state by @Copilot in https://github.com/microsoft/autogen/pull/7026 * Add comprehensive GitHub Copilot instructions for AutoGen development by @Copilot in https://github.com/microsoft/autogen/pull/7029 * Fix Redis caching always returning False due to unhandled string values by @Copilot in https://github.com/microsoft/autogen/pull/7022 * Fix OllamaChatCompletionClient load_component() error by adding to WELL_KNOWN_PROVIDERS by @Copilot in https://github.com/microsoft/autogen/pull/7030 * Fix finish_reason logic in Azure AI client streaming response by @litterzhang in https://github.com/microsoft/autogen/pull/6963 * Add security warnings and default to DockerCommandLineCodeExecutor by @ekzhu in https://github.com/microsoft/autogen/pull/7035 * Fix: Handle nested objects in array items for JSON schema conversion by @kkutrowski in https://github.com/microsoft/autogen/pull/6993 * Fix not supported field warnings in count_tokens_openai by @seunggil1 in https://github.com/microsoft/autogen/pull/6987 * Fix(mcp): drain pending command f</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://alexwang.ai/posts/associative-memory" target="_blank">You could have invented transformers from memory</a>
+          </div>
+          <div class="meta">Anthropic News &bull; Score: 80/100</div>
+          <div class="summary-text">You could have invented transformers from memory. Details announced via Anthropic News.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Sets the baseline capabilities for agentic reasoning and tool use you can incorporate into hands-on student workshops.</div>
+          
+        </div>
+      
+
+      <!-- 3. Dev & Cloud -->
+      <div class="section-title">Software &amp; Cloud Development</div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://github.com/ollama/ollama/releases/tag/v0.40.6" target="_blank">ollama/ollama Release: v0.40.6</a>
+          </div>
+          <div class="meta">GitHub Releases &bull; Score: 60/100</div>
+          <div class="summary-text">## What&#39;s Changed * win: prevent orphaned runners by @dhiltgen in https://github.com/ollama/ollama/pull/18500 * gguf: add the q2_0 tensor and file types by @jmorganca in https://github.com/ollama/ollama/pull/18967 * Launch clef in Ollama&#39;s cloud by @jberg5 in https://github.com/ollama/ollama/pull/19036 * use identifiers for --ask mode question keys by @jberg5 in https://github.com/ollama/ollama/pull/19041 **Full Changelog**: https://github.com/ollama/ollama/compare/v0.40.5...v0.40.6-rc0</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Essential for updating practical cloud labs and NAVTTC vocational training syllabi with industry-standard tooling.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://github.com/vllm-project/vllm/releases/tag/v0.32.0" target="_blank">vllm-project/vllm Release: v0.32.0</a>
+          </div>
+          <div class="meta">GitHub Releases &bull; Score: 85/100</div>
+          <div class="summary-text"># v0.32.0 ## Highlights This release features 814 commits from 363 contributors (121 new)! * **Structured decisions and generic parsers**: the new `POST /v1/systemone` endpoint answers `choice`, `noul` and `score` questions over a structured state (#59299), is served by default (#60677, #60696), and also runs on `Cloudflare/clef-omni` (#61064), `LiquidAI/d1-3B` (#60676) and DiffusionGemma (#60466). The new `hf` tool and reasoning parser (`--tool-call-parser hf`, `--reasoning-parser hf`) reads the checkpoint&#39;s `response_template`, so models that ship it need no model-specific parser (#58604, #58602), in both the Python and Rust frontends (#59005).</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Directly applicable to full-stack student training modules and modern web application development.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://github.com/huggingface/transformers/releases/tag/v5.20.1" target="_blank">huggingface/transformers Release: Release v5.20.1</a>
+          </div>
+          <div class="meta">GitHub Releases &bull; Score: 90/100</div>
+          <div class="summary-text"># Release v5.20.1 Special surprise including the new model Beam from Reflection AI :partying_face: &lt;img width=&#34;2912&#34; height=&#34;1440&#34; alt=&#34;Gemini_Generated_Image_ox4hjlox4hjlox4h&#34; src=&#34;https://github.com/user-attachments/assets/bfc7ff16-4340-490c-925c-b1512e4ceb32&#34; /&gt; Beam is a token-efficient, frontier-scale model focused on coding and agentic use cases. It is built for teams that want to run a powerful model on their own hardware, infrastructure, or cloud, and customize it to their specific needs. **Links:** [Documentation](https://huggingface.co/docs/transformers/main/en/model_doc/beam) * Fix small bug in auto mappings (#49664) by @yonigozlan in [#49664](https://github.com/huggingface/transformers/pull/49664) ## Some real patch fixes We broke loading models on older torch versions :cry: should be fixed now.</div>
+          
+            <div class="why-it-matters"><strong>Why it matters to you:</strong> Essential for updating practical cloud labs and NAVTTC vocational training syllabi with industry-standard tooling.</div>
+          
+        </div>
+      
+
+      <!-- 4. Research Watch -->
+      <div class="section-title">Research Watch &amp; Open Gaps</div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22336v1" target="_blank">Robust Reinforcement Learning for Dynamic Treatment Regimes under Model and Measurement Uncertainty</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 65/100</div>
+          <div class="summary-text">We develop a robust reinforcement learning (RL) framework for learning adaptive treatment policies that generalize across patients and remain reliable under errors in the measured biomarker and shifts in the disease dynamics. By modeling the patient as a hidden context, we address generalization and robustness in a unified manner through robust contextual Markov decision processes. Applying our framework to adaptive therapy for metastatic prostate cancer in a simulator calibrated to clinical data, we obtain generalizable and robust policies that substantially outperform the existing adaptive therapy method.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22340v1" target="_blank">Dexterity from Supervised Play</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 65/100</div>
+          <div class="summary-text">How can robots autonomously collect the contact-rich experience needed to learn dexterous manipulation? We present DSP: Dexterity from supervised play, a framework in which a robot learns a play policy from minutes of human play through behavior cloning, then deploys it autonomously to collect hours of interaction data to train a world model. During inference, the same play policy then guides model-predictive control (MPC) by proposing candidate action sequences for evaluation under the learned world model.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22350v1" target="_blank">FDE-Gym: The Last Mile of AI Delivery</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 65/100</div>
+          <div class="summary-text">Existing agent benchmarks typically evaluate agents on well-specified tasks defined by issue reports, specifications, or task tickets. Real-world customer delivery is different: forward-deployed engineers (FDEs) must clarify ambiguous requirements, work in live systems, and uncover unstated constraints. We introduce FDE-Gym, a benchmark of 95 end-to-end delivery tasks from 20 customer scenarios across 18 sectors, each adapted by industry experts from real-world delivery projects.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22362v1" target="_blank">CoDA: Co-Evolution of Data Engines and Action Policies</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 65/100</div>
+          <div class="summary-text">Generative simulation can automate robot environment construction, but physically valid environments are not necessarily useful for training. The challenge is to identify environments that address a policy&#39;s failures and supervision that helps it overcome them. We introduce CoDA, a framework in which a simulation data engine and an action policy co-evolve through a shared heterogeneous memory of environment construction, policy failures, and learning progress.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22372v1" target="_blank">LIBERO-PeRM: Benchmarking Personalized Robotic Manipulation</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 65/100</div>
+          <div class="summary-text">Personalization is essential for general-purpose robots to transition into household environments and achieve true practicality. While general robotic manipulation has been extensively studied, personalized robotic manipulation (PeRM) lacks a controlled benchmark for separating task completion from preference satisfaction. We introduce LIBERO-PeRM, a benchmark for preference learning in embodied agents.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22344v1" target="_blank">MLExpert: Towards a Generalist Agentic Model for Autonomous Machine Learning Engineering</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 80/100</div>
+          <div class="summary-text">Large language models (LLMs) are expanding from assisting scientific research and engineering to autonomously developing and improving AI systems, advancing AI for AI (AI4AI) as a pathway toward recursive self-improvement (RSI). Workflow-driven machine learning engineering (MLE) systems provide a practical path toward this pursuit through complex orchestration that manages long-horizon experimentation, while recent MLE systems adopt model-directed interaction, allowing models to autonomously organize experiments and adapt optimization strategies based on execution feedback. However, feedback from each experiment reflects several preceding decisions, and a long MLE run contains many such costly experiments.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Useful for your NLP lectures and ongoing publications on efficient model architectures.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Possible publication opportunity: Investigating sample efficiency and domain adaptation across low-resource dialects or localized educational datasets.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22357v1" target="_blank">Stability of Quantum LDPC States under Local Pauli Noise</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 80/100</div>
+          <div class="summary-text">Quantum low-density parity-check (qLDPC) codes have a canonical mixed state---the normalized projector onto the code space---that lies at the intersection of quantum error correction and quantum many-body physics, yet the stability of its information-theoretic structure under local noise remains poorly understood. Recent progress on mixed-state phases of matter has identified the spatial decay of conditional mutual information (CMI) $I(A:C|B)$ as a key diagnostic of such stability, analogous to the role of the spectral gap for quantum ground states. We prove that, for the normalized code-projector state of a $\mathbb{Z}_d$ qLDPC stabilizer code under local Pauli noise, the CMI across a buffer $B$ separating $A$ from $C$ decays exponentially with the width of $B$ in two complementary noise regimes independent of system size.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Directly relevant to your quantum research agenda; highlights state-of-the-art benchmarks in qubit stability and algorithmic design.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Potential research gap: Evaluating noise resistance and error mitigation when interfacing this architecture with hybrid classical-quantum pipelines.</div>
+          
+        </div>
+      
+        <div class="card">
+          <div class="card-title">
+            <a href="https://arxiv.org/abs/2610.22367v1" target="_blank">Discovering state-of-the-art quantum circuits with large language models</a>
+          </div>
+          <div class="meta">arXiv &bull; Score: 100/100</div>
+          <div class="summary-text">Significant efforts are currently being directed toward the implementation of large-scale quantum information processors, but realizing useful quantum advantage also requires the development of efficient quantum algorithms. While for many practical problems the dominant resource costs are associated with a small set of computational primitives, optimizing them in the quantum setting presents unique challenges, including a reversibility constraint absent from ordinary classical computation. Here we introduce an evolutionary framework in which large language models (LLMs) propose circuit designs and an independent evaluator verifies and scores them.</div>
+          
+            <div class="why-it-matters"><strong>Relevance:</strong> Directly relevant to your quantum research agenda; highlights state-of-the-art benchmarks in qubit stability and algorithmic design.</div>
+          
+          
+            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Potential research gap: Evaluating noise resistance and error mitigation when interfacing this architecture with hybrid classical-quantum pipelines.</div>
+          
+        </div>
+      
+
+      <!-- 5. Jobs for You -->
+      <div class="section-title">Jobs for You (Pakistan: Lahore &amp; Gujranwala First)</div>
+      
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://navttc.gov.pk/careers/" target="_blank">Lead Technical Trainer - AI &amp; Cloud Computing</a>
+            </div>
+            <div class="meta">
+              <strong>NAVTTC (National Vocational &amp; Technical Training Commission)</strong> &bull;
+              <span class="badge badge-city">Lahore</span>
+              <span class="badge badge-eligible">
+                ELIGIBLE
+              </span>
+              &bull; Deadline: <strong>02 Nov 2026</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 4.5 yrs: OK.
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://navttc.gov.pk/careers/" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://navttc.gov.pk/careers" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://www.ppsc.gop.pk" target="_blank">Lecturer in Computer Science (BPS-17)</a>
+            </div>
+            <div class="meta">
+              <strong>PPSC - Punjab Public Service Commission</strong> &bull;
+              <span class="badge badge-city">Lahore</span>
+              <span class="badge badge-eligible">
+                ELIGIBLE
+              </span>
+              &bull; Deadline: <strong>04 Nov 2026</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> Max age 33, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 0.0 yrs required, you have 3.5 yrs: OK.
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://www.ppsc.gop.pk" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://www.ppsc.gop.pk/(S(1))/Jobs.aspx" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="mailto:research@uet.edu.pk" target="_blank">Research Associate (Quantum Computing &amp; NLP Lab)</a>
+            </div>
+            <div class="meta">
+              <strong>UET Lahore</strong> &bull;
+              <span class="badge badge-city">Lahore</span>
+              <span class="badge badge-eligible">
+                ELIGIBLE
+              </span>
+              &bull; Deadline: <strong>25 Oct 2026</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> Max age 32, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 0.0 yrs required, you have 4.5 yrs: OK.
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="mailto:research@uet.edu.pk" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://jobs.uet.edu.pk" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="http://pu.edu.pk/careers/" target="_blank">Visiting Faculty - Programming &amp; Deep Learning</a>
+            </div>
+            <div class="meta">
+              <strong>University of the Punjab (PU)</strong> &bull;
+              <span class="badge badge-city">Lahore</span>
+              <span class="badge badge-eligible">
+                ELIGIBLE
+              </span>
+              &bull; Deadline: <strong>28 Oct 2026</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> Max age 38, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 1.0 yrs required, you have 3.5 yrs: OK.
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="http://pu.edu.pk/careers/" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="http://pu.edu.pk/careers" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="mailto:hr@gift.edu.pk" target="_blank">Lecturer in Computer Science &amp; Artificial Intelligence</a>
+            </div>
+            <div class="meta">
+              <strong>GIFT University Gujranwala</strong> &bull;
+              <span class="badge badge-city">Gujranwala</span>
+              <span class="badge badge-eligible">
+                ELIGIBLE
+              </span>
+              &bull; Deadline: <strong>30 Oct 2026</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 3.5 yrs: OK.
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="mailto:hr@gift.edu.pk" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://www.gift.edu.pk/careers" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://job.pk/apply" target="_blank">Software Lecturer Test</a>
+            </div>
+            <div class="meta">
+              <strong>Test University Lahore</strong> &bull;
+              <span class="badge badge-city">Lahore</span>
+              <span class="badge badge-maybe">
+                MAYBE
+              </span>
+              &bull; Deadline: <strong>25 Oct 2026</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility Check:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned.
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://job.pk/apply" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://job.pk/123" class="btn-source" target="_blank">Original Source &rarr;</a>
+            </div>
+          </div>
+        
+      
+
+      <!-- Closing Soon Jobs Sub-section -->
+      
+        <div style="margin-top: 20px;">
+          <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px;">Closing Soon (Next 5 Days)</h4>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Lecturer in Computer Science &amp; Artificial Intelligence</strong> &bull; GIFT University Gujranwala (Gujranwala) &bull; Deadline: <strong style="color: #b91c1c;">30 Oct 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="mailto:hr@gift.edu.pk" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Visiting Faculty - Programming &amp; Deep Learning</strong> &bull; University of the Punjab (PU) (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">28 Oct 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="http://pu.edu.pk/careers/" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Research Associate (Quantum Computing &amp; NLP Lab)</strong> &bull; UET Lahore (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">25 Oct 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="mailto:research@uet.edu.pk" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Lecturer in Computer Science (BPS-17)</strong> &bull; PPSC - Punjab Public Service Commission (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">04 Nov 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="https://www.ppsc.gop.pk" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Lead Technical Trainer - AI &amp; Cloud Computing</strong> &bull; NAVTTC (National Vocational &amp; Technical Training Commission) (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">02 Nov 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="https://navttc.gov.pk/careers/" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Software Lecturer Test</strong> &bull; Test University Lahore (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">25 Oct 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="https://job.pk/apply" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Placement &amp; Corporate Relations Officer</strong> &bull; University of Gujrat (UOG) (Gujrat) &bull; Deadline: <strong style="color: #b91c1c;">05 Nov 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="https://uog.edu.pk/career" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
+              <strong>Lecturer in Data Science</strong> &bull; TestOrg Lahore (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">30 Oct 2026</strong>
+              <div style="margin-top: 4px;">
+                <a href="https://pk.indeed.com/viewjob?jk=12345" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
+              </div>
+            </div>
+          
+        </div>
+      
+
+      <!-- Remote & AI-Automation Jobs -->
+      <div class="section-title">Remote &amp; AI-Automation Jobs (Worldwide &amp; Open to Pakistan)</div>
+      
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" target="_blank">RPA &amp; Python Workflow Automation Developer</a>
+            </div>
+            <div class="meta">
+              <strong>SyncFlow Solutions</strong> &bull;
+              <span class="badge badge-city">Worldwide Remote</span>
+              <span class="badge badge-maybe">
+                MAYBE
+              </span>
+              &bull; Score: <strong>100/100</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 4.5 yrs: OK. Worldwide remote: Open to applicants from Pakistan: OK..
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" class="btn-source" target="_blank">Source Link &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" target="_blank">LLM Fine-Tuning &amp; Evaluation Specialist</a>
+            </div>
+            <div class="meta">
+              <strong>DeepMetric Global</strong> &bull;
+              <span class="badge badge-city">Worldwide Remote</span>
+              <span class="badge badge-maybe">
+                MAYBE
+              </span>
+              &bull; Score: <strong>100/100</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" class="btn-source" target="_blank">Source Link &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" target="_blank">Generative AI &amp; Agentic Workflow Engineer</a>
+            </div>
+            <div class="meta">
+              <strong>AutomateAI Labs</strong> &bull;
+              <span class="badge badge-city">Worldwide Remote</span>
+              <span class="badge badge-maybe">
+                MAYBE
+              </span>
+              &bull; Score: <strong>100/100</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" class="btn-source" target="_blank">Source Link &rarr;</a>
+            </div>
+          </div>
+        
+          <div class="card">
+            <div class="card-title">
+              <a href="https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746" target="_blank">Tech Lead Full-Stack Rails Engineer</a>
+            </div>
+            <div class="meta">
+              <strong>Mitre Media</strong> &bull;
+              <span class="badge badge-city">Worldwide Remote</span>
+              <span class="badge badge-maybe">
+                MAYBE
+              </span>
+              &bull; Score: <strong>90/100</strong>
+            </div>
+            <div class="job-reason">
+              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. Qualification: Not mentioned. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
+            </div>
+            <div style="margin-top: 10px;">
+              <a href="https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746" class="btn-apply" target="_blank">Apply / View</a>
+              <a href="https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746" class="btn-source" target="_blank">Source Link &rarr;</a>
+            </div>
+          </div>
+        
+      
+
+      <!-- 6. Quote of the Day -->
+      <div class="quote-box">
+        "In quantum computing, physical qubit counts grab headlines, but logical error-corrected qubits and transversal gate fidelity are the real milestones."
+        <div class="quote-author">&mdash; John Preskill (Caltech Quantum Colloquium)</div>
+      </div>
+
+      <!-- 7. Read Later List -->
+      
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      DevResearch Daily Briefing &bull; Configured for Pakistan (Asia/Karachi 10:00 AM)<br>
+      Manage your profile, sources, or job tracking in the local dashboard.
+    </div>
+  </div>
+</body>
+</html>
