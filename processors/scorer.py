@@ -1,5 +1,4 @@
-"""Relevance scoring engine comparing items against the user profile (0-100)."""
-import re
+from datetime import datetime, timezone
 from typing import List, Tuple
 from fetchers.base import RawItem
 from config.profile_loader import UserProfile
@@ -38,6 +37,23 @@ def score_item_relevance(item: RawItem, profile: UserProfile) -> int:
     # 4. Podcast & Interview Takeaways (+10 pts)
     if item.extra.get("is_podcast"):
         score += 10
+
+    # 5. Recency Boost & Stale Penalty (Fresh 24h news prioritized)
+    if item.published_at:
+        try:
+            pub_dt = item.published_at
+            if pub_dt.tzinfo is None:
+                pub_dt = pub_dt.replace(tzinfo=timezone.utc)
+            now_dt = datetime.now(timezone.utc)
+            age_hours = (now_dt - pub_dt).total_seconds() / 3600.0
+            if age_hours <= 24.0:
+                score += 15  # Fresh breaking news today
+            elif age_hours > 48.0:
+                score -= 20  # Older news deprioritized
+            elif age_hours > 96.0:
+                score -= 35  # Stale news strongly demoted
+        except Exception:
+            pass
 
     # Clamp score between 10 and 100
     final_score = max(10, min(100, score))

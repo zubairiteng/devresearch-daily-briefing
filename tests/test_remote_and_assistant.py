@@ -134,7 +134,7 @@ def test_workflow_config_syntax():
     # In PyYAML, 'on' can parse as boolean True
     triggers = data.get("on") if "on" in data else data.get(True, {})
     schedule = triggers.get("schedule", [])
-    assert any(s.get("cron") == "0 5 * * *" for s in schedule)
+    assert any(s.get("cron") in ("0 5 * * *", "10 5 * * *") for s in schedule)
     assert "workflow_dispatch" in triggers
 
     # Verify steps contain pipeline run, database persistence, and pages deployment

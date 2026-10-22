@@ -61,8 +61,13 @@ class DigestRenderer:
         # Subject: DevResearch Daily | <date> | <top headline>
         top_headline = "Latest AI, Dev, Research & Jobs Updates"
         if news_items:
-            top_headline = news_items[0].title
-            # Strip prefixes if any
+            # Prioritize breaking AI/LLM or research headlines over static release tags
+            fresh_candidate = None
+            for item in news_items:
+                if "Release:" not in item.title:
+                    fresh_candidate = item.title
+                    break
+            top_headline = fresh_candidate or news_items[0].title
             if len(top_headline) > 65:
                 top_headline = top_headline[:62] + "..."
 

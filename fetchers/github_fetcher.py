@@ -43,6 +43,10 @@ class GitHubFetcher(BaseFetcher):
                             pub_date = date_parser.parse(pub_str)
                             if pub_date.tzinfo is None:
                                 pub_date = pub_date.replace(tzinfo=timezone.utc)
+                            # Only include fresh releases from the last 72 hours
+                            if (datetime.now(timezone.utc) - pub_date).total_seconds() > 72 * 3600:
+                                logger.debug(f"Skipping older release for {repo} ({pub_str})")
+                                continue
                         except Exception:
                             pass
 
