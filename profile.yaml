@@ -1,5 +1,5 @@
 personal:
-  name: Dr./Prof. Dev Researcher
+  name: Prof. Zubair Ahmad
   birth_date: '1998-05-15'
   email: zubairahmad.mehmood@iisat.edu.pk
 education:
@@ -42,6 +42,12 @@ research_interests:
   - Natural Language Processing (NLP)
   - Large Language Models (LLMs)
   topics_of_interest:
+  - IEEE Conferences in Pakistan (FIT, INMIC, HONET, IBCAST)
+  - HEC Research Grants, IRSIP Fellowship, NRPU, and Faculty Development Programs
+    (FDP)
+  - NCEAC Accreditation & Academic Guidelines
+  - China Robotics & Automation Revolution (Unitree, Humanoid Robots, Autonomous Systems)
+  - Elon Musk & xAI (Grok, Tesla Optimus, Autonomous Hardware)
   - Quantum algorithms and hardware benchmarks
   - Reasoning and agentic workflows in LLMs
   - Efficient fine-tuning, quantization, and edge deployment
@@ -49,6 +55,13 @@ research_interests:
   - Open research gaps suitable for conference/journal publication
 job_preferences:
   target_roles:
+  - Lecturer (Computer Science / AI)
+  - Visiting Faculty
+  - Placement Officer / Career Counselor
+  - NAVTTC / TEVTA Training Coordinator
+  - AI Automation Engineer (n8n, Agentic AI, Zapier)
+  - Full-Stack Web Developer (React, Next.js, Python, FastAPI)
+  - Digital Marketing & AI Content Specialist
   - Lecturer
   - Assistant Professor
   - Visiting Faculty

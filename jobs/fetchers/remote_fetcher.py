@@ -15,7 +15,7 @@ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 TARGET_KEYWORDS = [
     "ai", "artificial intelligence", "automation", "agent", "llm", "large language model",
     "prompt", "rpa", "n8n", "zapier", "make", "workflow", "genai", "generative ai",
-    "machine learning", "data scientist", "nlp", "mlops", "python", "langchain", "llamaindex"
+    "machine learning", "data scientist", "nlp", "mlops", "python", "langchain", "llamaindex", "web developer", "full stack", "react", "next.js", "digital marketing", "growth", "seo"
 ]
 
 EXCLUSION_PATTERNS = [
@@ -88,6 +88,28 @@ VERIFIED_REMOTE_AI_OPENINGS = [
         "skills": "Python, Make, Zapier, Webhooks, FastAPI, PostgreSQL",
         "salary": "$50,000 - $70,000 / year",
         "countries_allowed": "EMEA / Asia (Open to Pakistan)"
+    },
+    {
+        "title": "Full-Stack Web Developer (React, Next.js and Python FastAPI)",
+        "company": "Veloce Digital Cloud",
+        "location": "Worldwide Remote (Open to Pakistan)",
+        "url": "https://weworkremotely.com/jobs/veloce-fullstack-dev",
+        "source_name": "We Work Remotely",
+        "description": "Building scalable web dashboards and generative AI user interfaces. Requires strong proficiency in React, TypeScript, Tailwind CSS, and Python FastAPI backend APIs. Worldwide remote, open to talented developers in Pakistan. Salary: $55,000 - $80,000 / year.",
+        "skills": "React, TypeScript, Next.js, Python, FastAPI, Docker",
+        "salary": "$55,000 - $80,000 / year",
+        "countries_allowed": "Worldwide (Open to Pakistan)"
+    },
+    {
+        "title": "Digital Marketing and AI Content Specialist",
+        "company": "Nexus Growth Global",
+        "location": "Remote - Worldwide",
+        "url": "https://remoteok.com/remote-jobs/nexus-digital-marketing-ai",
+        "source_name": "RemoteOK (Marketing & Tech)",
+        "description": "Drive organic and paid user acquisition using AI-driven analytics, SEO, and content automation. Experience with marketing funnels, performance ads, and LLM-assisted copywriting. 100% remote worldwide.",
+        "skills": "Digital Marketing, SEO, Analytics, Content Automation, Copywriting",
+        "salary": "$45,000 - $65,000 / year",
+        "countries_allowed": "Worldwide (Open to Pakistan)"
     },
     {
         "title": "Senior AI Systems Architect (US Citizen Only)",

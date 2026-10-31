@@ -63,12 +63,11 @@ async def run_daily_briefing(max_retries: int = 3) -> bool:
             closing_soon = JobRepository.get_closing_soon_jobs(days_window=5)
             read_later = NewsRepository.get_history(only_read_later=True, limit=5)
 
-            # 4. Render email
-            subject, html_body, txt_body = renderer.render_digest(
+            # 4. Render email in rich Urdu
+            subject, html_body, txt_body = renderer.render_urdu_digest(
                 news_items=news_items,
                 jobs=saved_jobs,
-                closing_soon=closing_soon,
-                read_later=read_later
+                closing_soon=closing_soon
             )
 
             # 5. Dispatch email

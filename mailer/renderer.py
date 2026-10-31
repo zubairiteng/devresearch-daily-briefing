@@ -1,9 +1,10 @@
-"""Template renderer for HTML and Plain-Text email digests."""
+"""Template renderer for HTML and Plain-Text email digests (English & Urdu)."""
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from jinja2 import Environment, FileSystemLoader
 from database.models import NewsItemModel, JobItemModel
+from mailer.urdu_synthesizer import UrduDigestSynthesizer
 
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
 jinja_env = Environment(
@@ -39,7 +40,29 @@ class DigestRenderer:
     def __init__(self):
         self.html_tmpl = jinja_env.get_template("digest.html")
         self.txt_tmpl = jinja_env.get_template("digest.txt")
+        self.urdu_html_tmpl = jinja_env.get_template("digest_urdu.html")
+        self.urdu_txt_tmpl = jinja_env.get_template("digest_urdu.txt")
         self.error_tmpl = jinja_env.get_template("error_alert.html")
+
+    def render_urdu_digest(
+        self,
+        news_items: List[NewsItemModel],
+        jobs: List[JobItemModel],
+        closing_soon: List[JobItemModel],
+        date_obj: datetime = None
+    ) -> Tuple[str, str, str]:
+        """Renders rich, mature Urdu daily briefing (subject, html, txt)."""
+        dt = date_obj or datetime.now()
+        context = UrduDigestSynthesizer.synthesize(
+            news_items=news_items,
+            jobs=jobs,
+            closing_soon=closing_soon,
+            date_obj=dt
+        )
+        subject = context["subject"]
+        html_body = self.urdu_html_tmpl.render(context)
+        txt_body = self.urdu_txt_tmpl.render(context)
+        return subject, html_body, txt_body
 
     def render_digest(
         self,
@@ -47,9 +70,18 @@ class DigestRenderer:
         jobs: List[JobItemModel],
         closing_soon: List[JobItemModel],
         read_later: List[NewsItemModel] = None,
-        date_obj: datetime = None
+        date_obj: datetime = None,
+        language: str = "en"
     ) -> Tuple[str, str, str]:
-        """Returns (subject, html_content, text_content)."""
+        """Returns (subject, html_content, text_content). Defaults to English for backwards compatibility."""
+        if language == "ur":
+            return self.render_urdu_digest(
+                news_items=news_items,
+                jobs=jobs,
+                closing_soon=closing_soon,
+                date_obj=date_obj
+            )
+
         dt = date_obj or datetime.now()
         date_str = dt.strftime("%A, %B %d, %Y")
 
@@ -61,7 +93,6 @@ class DigestRenderer:
         # Subject: DevResearch Daily | <date> | <top headline>
         top_headline = "Latest AI, Dev, Research & Jobs Updates"
         if news_items:
-            # Prioritize breaking AI/LLM or research headlines over static release tags
             fresh_candidate = None
             for item in news_items:
                 if "Release:" not in item.title:
@@ -91,7 +122,6 @@ class DigestRenderer:
             ]
 
         # 5. Filter Jobs: Only ELIGIBLE or MAYBE, NEVER NOT ELIGIBLE.
-        # Split into Pakistan (Lahore/Gujranwala first) and Remote & AI jobs
         pakistan_jobs = [j for j in jobs if j.city != "Remote" and j.eligibility_status in ("ELIGIBLE", "MAYBE")]
         pakistan_jobs.sort(key=lambda j: (0 if j.eligibility_status == "ELIGIBLE" else 1, -j.relevance_score))
 

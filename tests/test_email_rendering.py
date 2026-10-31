@@ -155,3 +155,41 @@ def test_render_error_alert(renderer):
     subj, html = renderer.render_error_alert("Database connection timeout after 3 retries.")
     assert "URGENT" in subj
     assert "Database connection timeout after 3 retries." in html
+
+
+
+def test_render_urdu_digest(renderer, sample_news, sample_jobs):
+    subj, html, txt = renderer.render_urdu_digest(
+        news_items=sample_news,
+        jobs=sample_jobs,
+        closing_soon=[sample_jobs[0]],
+        date_obj=datetime(2026, 10, 31)
+    )
+
+    # 1. Subject line format in Urdu
+    assert "DevResearch Daily بریفنگ" in subj
+    assert "اوپن اے آئی" in subj or "مسک" in subj
+
+    # 2. RTL and Urdu language attributes
+    assert 'dir="rtl"' in html
+    assert 'lang="ur"' in html
+
+    # 3. Core sections exist in Urdu
+    assert "عالمی اے آئی و فرنٹیئر ٹیک انقلاب" in html
+    assert "اکیڈمک واچ، ریسرچ گرانٹس اور IEEE کانفرنسز" in html
+    assert "اشاعت کے لیے کھلے ریسرچ گیپس" in html
+    assert "کیریئر و جابز واچ" in html
+
+    # 4. Critical persona and entities mentioned
+    assert "پروفیسر زبیر احمد" in html
+    assert "ایلون مسک" in html
+    assert "اوپن اے آئی" in html
+    assert "اینتھروپک" in html
+    assert "چائنا" in html
+    assert "FIT" in html
+    assert "IRSIP" in html
+    assert "https://zubairiteng.github.io/devresearch-daily-briefing/" in html
+
+    # 5. Text fallback in Urdu
+    assert "ڈیو ریسرچ ڈیلی بریفنگ" in txt
+    assert "آج کا کلیدی اداریہ" in txt
