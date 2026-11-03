@@ -1,824 +1,599 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light dark">
-  <meta name="supported-color-schemes" content="light dark">
-  <title>DevResearch Daily | Oct 30, 2026 | Binance-hacker-1029 – $5.6B stolen from Binance</title>
+  <title>DevResearch Daily بریفنگ | بروز منگل، 3 نومبر 2026 | اوپن اے آئی، مسک روبوٹکس، IEEE کانفرنسز و جابز</title>
   <style>
-    :root {
-      color-scheme: light dark;
-      supported-color-schemes: light dark;
-    }
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      background-color: #f4f6f8;
-      color: #1a202c;
+      background-color: #0f172a;
+      font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', Tahoma, Arial, sans-serif;
+      color: #334155;
+      line-height: 1.8;
+      direction: rtl;
+      text-align: right;
     }
-    .wrapper {
+    .email-container {
       max-width: 680px;
       margin: 20px auto;
       background-color: #ffffff;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
     .header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      background: linear-gradient(135deg, #091e3a 0%, #1a365d 50%, #0f172a 100%);
       color: #ffffff;
-      padding: 32px 28px;
+      padding: 36px 32px;
+      border-bottom: 4px solid #38bdf8;
+    }
+    .header .brand-tag {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
     }
     .header h1 {
-      margin: 0 0 6px 0;
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      margin: 0 0 8px 0;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.4;
+      color: #f8fafc;
     }
-    .header .subtitle {
-      color: #94a3b8;
+    .header .meta-bar {
       font-size: 14px;
-      margin: 0;
+      color: #94a3b8;
+      margin-top: 6px;
+    }
+    .portal-banner {
+      background-color: #0284c7;
+      color: #ffffff;
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+    .portal-banner a {
+      color: #ffffff;
+      text-decoration: underline;
+      font-weight: bold;
     }
     .content {
-      padding: 28px;
+      padding: 30px;
     }
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #0f172a;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 8px;
-      margin-top: 32px;
-      margin-bottom: 18px;
+    .section-header {
       display: flex;
       align-items: center;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 10px;
+      margin-top: 36px;
+      margin-bottom: 20px;
     }
-    .section-title:first-of-type {
-      margin-top: 0;
+    .section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0;
     }
-    .brief-box {
-      background-color: #f8fafc;
-      border-left: 4px solid #3b82f6;
-      padding: 16px 20px;
-      border-radius: 6px;
-      margin-bottom: 24px;
+    .editorial-box {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-right: 5px solid #0284c7;
+      padding: 20px;
+      border-radius: 8px;
       font-size: 15px;
-      color: #334155;
+      color: #1e293b;
+      margin-bottom: 25px;
+      line-height: 1.9;
     }
     .card {
       background-color: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 18px 20px;
-      margin-bottom: 16px;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s ease;
+    }
+    .card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
     }
     .card-title {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
       margin: 0 0 8px 0;
-    }
-    .card-title a {
-      color: #1d4ed8;
-      text-decoration: none;
-    }
-    .card-title a:hover {
-      text-decoration: underline;
-    }
-    .meta {
-      font-size: 12px;
-      color: #64748b;
-      margin-bottom: 10px;
-    }
-    .summary-text {
-      font-size: 14px;
-      color: #334155;
-      margin-bottom: 10px;
-    }
-    .why-it-matters {
-      font-size: 13px;
-      color: #0369a1;
-      background-color: #f0f9ff;
-      border-radius: 4px;
-      padding: 8px 12px;
-      margin-top: 8px;
-    }
-    .research-gap-box {
-      font-size: 13px;
-      color: #7c2d12;
-      background-color: #ffedd5;
-      border-left: 3px solid #f97316;
-      border-radius: 4px;
-      padding: 8px 12px;
-      margin-top: 8px;
+      line-height: 1.5;
     }
     .badge {
       display: inline-block;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      text-transform: uppercase;
-      padding: 3px 8px;
+      padding: 3px 10px;
       border-radius: 4px;
-      margin-right: 6px;
+      margin-left: 8px;
+    }
+    .badge-primary {
+      background-color: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+    .badge-academic {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
     }
     .badge-eligible {
       background-color: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+    .card-text {
+      font-size: 14.5px;
+      color: #334155;
+      margin: 10px 0;
+      line-height: 1.8;
+    }
+    .takeaway-box {
+      background-color: #f0fdf4;
+      border-right: 3px solid #22c55e;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 13.5px;
       color: #15803d;
+      margin-top: 10px;
     }
-    .badge-maybe {
-      background-color: #fef3c7;
-      color: #b45309;
-    }
-    .badge-city {
-      background-color: #f1f5f9;
-      color: #475569;
-    }
-    .job-reason {
-      font-size: 12px;
-      color: #475569;
-      background-color: #f8fafc;
-      padding: 6px 10px;
-      border-radius: 4px;
-      margin: 8px 0;
+    .gap-box {
+      background-color: #fff7ed;
+      border-right: 3px solid #ea580c;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      color: #9a3412;
+      margin-top: 10px;
+      line-height: 1.7;
     }
     .btn-apply {
       display: inline-block;
-      background-color: #2563eb;
+      background-color: #0f172a;
       color: #ffffff !important;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 4px;
       text-decoration: none;
-      margin-right: 8px;
-    }
-    .btn-source {
-      display: inline-block;
-      font-size: 12px;
-      color: #64748b;
-      text-decoration: none;
-    }
-    .quote-box {
-      background: #faf5ff;
-      border-left: 4px solid #a855f7;
-      padding: 16px 20px;
-      border-radius: 6px;
-      margin: 24px 0;
-      font-style: italic;
-      color: #4a044e;
-    }
-    .quote-author {
-      font-weight: 600;
-      font-style: normal;
-      margin-top: 6px;
+      padding: 6px 16px;
       font-size: 13px;
-      color: #7e22ce;
+      font-weight: 600;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .btn-portal {
+      display: block;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      text-align: center;
+      padding: 16px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 8px;
+      margin: 30px 0 10px 0;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
     }
     .footer {
       background-color: #f8fafc;
       border-top: 1px solid #e2e8f0;
-      padding: 20px 28px;
-      font-size: 12px;
-      color: #94a3b8;
-      text-align: center;
-    }
-    .footer a {
+      padding: 24px 30px;
+      font-size: 13px;
       color: #64748b;
-      text-decoration: underline;
-    }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #0b0f19;
-        color: #f1f5f9;
-      }
-      .wrapper {
-        background-color: #111827;
-        border-color: #1f2937;
-      }
-      .section-title {
-        color: #f8fafc;
-        border-color: #1f2937;
-      }
-      .brief-box {
-        background-color: #1e293b;
-        color: #e2e8f0;
-      }
-      .card {
-        background-color: #1f2937;
-        border-color: #374151;
-      }
-      .card-title a {
-        color: #60a5fa;
-      }
-      .summary-text {
-        color: #cbd5e1;
-      }
-      .why-it-matters {
-        background-color: #082f49;
-        color: #7dd3fc;
-      }
-      .research-gap-box {
-        background-color: #451a03;
-        color: #fdba74;
-      }
-      .job-reason {
-        background-color: #111827;
-        color: #94a3b8;
-      }
-      .quote-box {
-        background-color: #2e1065;
-        color: #f3e8ff;
-      }
-      .footer {
-        background-color: #0f172a;
-        border-color: #1e293b;
-        color: #64748b;
-      }
+      text-align: center;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <!-- Header -->
+
+  <div class="email-container">
+    
+    <!-- Top Header -->
     <div class="header">
-      <h1>DevResearch Daily Briefing</h1>
-      <p class="subtitle">Friday, October 30, 2026 &bull; Delivered for University Lecturer, Placement & AI Research Profile</p>
+      <span class="brand-tag">🎯 پرسنل بریفنگ برائے پروفیسر زبیر احمد</span>
+      <h1>ڈیو ریسرچ ڈیلی بریفنگ (DevResearch)</h1>
+      <div class="meta-bar">
+        <span>📅 بروز منگل، 3 نومبر 2026</span> &bull; 
+        <span>MS CS / لیکچرار / پلیسمنٹ آفیسر / ریسرچر ایڈیشن</span>
+      </div>
+    </div>
+
+    <!-- Live Public Portal Banner -->
+    <div class="portal-banner">
+      🌐 <strong>آن لائن پبلک پورٹل دستیاب ہے:</strong> 
+      <a href="https://zubairiteng.github.io/devresearch-daily-briefing/" target="_blank">یہاں کلک کر کے لائیو ڈیش بورڈ کھولیں &larr;</a>
     </div>
 
     <div class="content">
-      <!-- 1. Today in brief (3 lines) -->
-      <div class="section-title">Today in Brief</div>
-      <div class="brief-box">
-        
-          <div style="margin-bottom: 6px;">&bull; AI/LLM: Binance-hacker-1029 – $5.6B stolen from Binance</div>
-        
-          <div style="margin-bottom: 6px;">&bull; Research: Renormalization for Robust Memory without Synchronization</div>
-        
-          <div style="margin-bottom: 6px;">&bull; How we detect frontier model misalignment</div>
-        
+      
+      <!-- 1. Executive Briefing / اداریہ -->
+      <div class="editorial-box">
+        <strong style="color: #0369a1; font-size: 16px;">💡 آج کا کلیدی جائزہ (Executive Perspective):</strong><br>
+        عالمی ٹیکنالوجی کا میدان اس وقت ماڈل کے خام حجم (Raw Model Scale) سے نکل کر ٹیسٹ ٹائم کمپیوٹ (Test-Time Compute)، خودمختار ایجنٹس (Agentic AI) اور مادی دنیا کے روبوٹکس (Humanoid Embodied AI) کی جانب منتقل ہو چکا ہے۔ ایلون مسک کی xAI اور ٹیسلا روبوٹکس، اوپن اے آئی کے ریزننگ ماڈلز، اور دوسری طرف چائنا کا ہیومنائڈ روبوٹس کی بڑے پیمانے پر تیاری کا انقلاب آئندہ نسل کے لیے انڈسٹری اور اکیڈمیا کی حدود کو دوبارہ رقم کر رہے ہیں۔ بطور کمپیوٹر سائنس لیکچرار، ریسرچر اور پلیسمنٹ آفیسر آپ کے لیے ان عالمی تبدیلیوں اور ملکی اکیڈمک و روزگار کے مواقع سے باخبر رہنا کلیدی حیثیت رکھتا ہے۔
       </div>
 
-      <!-- 2. AI & LLM News -->
-      <div class="section-title">AI &amp; LLM Industry News</div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arkm.com/explorer/entity/21a94755-f604-45e5-9501-6542e23005e8" target="_blank">Binance-hacker-1029 – $5.6B stolen from Binance</a>
-          </div>
-          <div class="meta">Anthropic News &bull; Score: 65/100</div>
-          <div class="summary-text">Binance-hacker-1029 – $5.6B stolen from Binance. Details announced via Anthropic News.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Sets the baseline capabilities for agentic reasoning and tool use you can incorporate into hands-on student workshops.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://openai.com/index/ropes-gray-ai-diligence" target="_blank">How Ropes &amp; Gray is developing AI for transactional diligence</a>
-          </div>
-          <div class="meta">OpenAI Blog &bull; Score: 65/100</div>
-          <div class="summary-text">Ropes &amp; Gray is developing AI for transactional diligence with OpenAI. Lawyers review grouped documents, summaries, and reports before advising clients.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://openai.com/index/how-we-detect-frontier-model-misalignment" target="_blank">How we detect frontier model misalignment</a>
-          </div>
-          <div class="meta">OpenAI Blog &bull; Score: 65/100</div>
-          <div class="summary-text">OpenAI uses layered monitoring to detect frontier model misalignment and unauthorized agent behavior so responders can intervene before incidents escalate.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://openai.com/index/updated-model-spec" target="_blank">An updated Model Spec for more capable and beneficial AI</a>
-          </div>
-          <div class="meta">OpenAI Blog &bull; Score: 65/100</div>
-          <div class="summary-text">OpenAI’s updated Model Spec outlines five core values to guide more capable AI toward sound judgment, human agency, and faithfulness to human intent.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://www.theverge.com/ai-artificial-intelligence/1022519/google-gemini-file-editing-documents-pdfs" target="_blank">You can generate and edit Google Docs files directly in Gemini chats now</a>
-          </div>
-          <div class="meta">The Verge Tech &bull; Score: 75/100</div>
-          <div class="summary-text">Now you can generate, preview, and edit PDFs, Google Docs, Google Sheets, slide decks, Markdown files, TXT files, and code directly within Google Gemini . The new file editing capabilities are available starting today for all Gemini users, and while PDF previews/editing works on both the web and mobile, all other file formats are only in the web version for now. Google added support for generating and downloading files in Gemini earlier this year, but now you can tweak those files without leaving the Gemini app.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Sets the baseline capabilities for agentic reasoning and tool use you can incorporate into hands-on student workshops.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://techcrunch.com/2026/10/29/mistral-releases-weights-for-its-trillion-parameter-ai-model-targeting-cybersecurity" target="_blank">Mistral releases weights for its trillion-parameter AI model, targeting cybersecurity</a>
-          </div>
-          <div class="meta">TechCrunch AI &bull; Score: 75/100</div>
-          <div class="summary-text">Mistral says its new model can afford organizations a kind of control over its cyber defenses that closed models can&#39;t.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Keeps you ahead of the fast-moving tech race, from hardware bottlenecks to emerging model capabilities.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://techcrunch.com/2026/10/29/ex-palantir-execs-launch-dream-with-17m-from-a16z-to-build-ai-world-models-for-construction" target="_blank">Ex-Palantir execs launch Dream with $17M from a16z to build AI world models for construction</a>
-          </div>
-          <div class="meta">TechCrunch AI &bull; Score: 85/100</div>
-          <div class="summary-text">Dream is grounded in real physics and construction standards. Just as LLMs learn from text, Dream&#39;s world model is trained on more than 100 million square feet of building data gathered from permit archives across the United States.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Keeps you ahead of the fast-moving tech race, from hardware bottlenecks to emerging model capabilities.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://mistral.ai/news/mistral-large-4-oss" target="_blank">We&#39;re releasing the weights of Mistral Large 4</a>
-          </div>
-          <div class="meta">Anthropic News &bull; Score: 85/100</div>
-          <div class="summary-text">We&#39;re releasing the weights of Mistral Large 4. Details announced via Anthropic News.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Sets the baseline capabilities for agentic reasoning and tool use you can incorporate into hands-on student workshops.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://github.com/mottopanikeiku/doomformer" target="_blank">I Turned DOOM into a Transformer</a>
-          </div>
-          <div class="meta">Anthropic News &bull; Score: 95/100</div>
-          <div class="summary-text">Show HN: I Turned DOOM into a Transformer. Details announced via Anthropic News.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Sets the baseline capabilities for agentic reasoning and tool use you can incorporate into hands-on student workshops.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://martinfowler.com/bliki/LLM-Voice.html" target="_blank">LLM Voice</a>
-          </div>
-          <div class="meta">Anthropic News &bull; Score: 95/100</div>
-          <div class="summary-text">LLM Voice. Details announced via Anthropic News.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Sets the baseline capabilities for agentic reasoning and tool use you can incorporate into hands-on student workshops.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://github.com/huggingface/transformers/releases/tag/v5.22.0" target="_blank">huggingface/transformers Release: v5.22.0: Mistral Large 4 (Le Chonk)</a>
-          </div>
-          <div class="meta">GitHub Releases &bull; Score: 100/100</div>
-          <div class="summary-text">## New Models ### Mistral Large 4 (Le Chonk) &lt;img width=&#34;1329&#34; height=&#34;780&#34; alt=&#34;image&#34; src=&#34;https://github.com/user-attachments/assets/1cff9ca7-19e3-4622-8db6-fb1cfa842579&#34; /&gt; Mistral Large 4 is Mistral&#39;s largest and most capable model to date: a 1 trillion-parameter natively multimodal Mixture-of-Experts model with 49 billion active parameters per token (52 billion including embeddings and output layers), trained from scratch on 3,800 NVIDIA Grace Blackwell GPUs in Mistral&#39;s own datacenters in Europe. Mistral Large 4 unifies instruction following, reasoning, coding, and agentic workflows in a single set of weights. While a generalist model, it shows especially good performance on workloads such as cybersecurity, finance, and law, and it surpasses frontier closed models on visual grounding.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Keeps you ahead of the fast-moving tech race, from hardware bottlenecks to emerging model capabilities.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://openai.com/index/openai-servicenow-partnership-expansion" target="_blank">OpenAI and ServiceNow expand partnership across enterprise workflows</a>
-          </div>
-          <div class="meta">OpenAI Blog &bull; Score: 65/100</div>
-          <div class="summary-text">OpenAI and ServiceNow expand their partnership to bring OpenAI models and agents into ServiceNow and ServiceNow workflows into ChatGPT and Codex.</div>
-          
-            <div class="why-it-matters"><strong>Why it matters to you:</strong> Key open-weight milestone that gives your university lab and students locally hosted alternatives without reliance on proprietary APIs.</div>
-          
-        </div>
-      
-
-      <!-- 3. Dev & Cloud -->
-      <div class="section-title">Software &amp; Cloud Development</div>
-      
-
-      <!-- 4. Research Watch -->
-      <div class="section-title">Research Watch &amp; Open Gaps</div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40651v1" target="_blank">Renormalization for Robust Memory without Synchronization</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 80/100</div>
-          <div class="summary-text">Local error correction can preserve classical information against noise, but protection under synchronized updates need not survive when sites evolve at independent random times. Establishing stability is particularly challenging when protection relies on the collective action of competing local rules. Here we develop a spacetime renormalization framework that reveals how independently acting local updates can collectively stabilize memory.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40627v1" target="_blank">ShallowDefend: Harnessing Shallow Safety Alignment for Multi-Turn Defender</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 95/100</div>
-          <div class="summary-text">Safety alignment has enabled large language models to reliably refuse harmful requests directly, yet the same request distributed across a multi-turn conversation still succeeds far too often. This brittleness has a mechanistic root: Alignment is shallow, with safety behavior concentrated in a model&#39;s first few output tokens, and existing defenses inherit the weakness, supervising the surface form of the response without ever giving the model an explicit safety decision to learn. We take the opposite view of shallowness: if a short span determines the trajectory of an entire response, that span is the highest-leverage place to intervene, and the defender can occupy it first.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Useful for your NLP lectures and ongoing publications on efficient model architectures.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Possible publication opportunity: Investigating sample efficiency and domain adaptation across low-resource dialects or localized educational datasets.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40638v1" target="_blank">Entanglement diagnostics of stochastic-resetting steady states: theory and measurement on superconducting qubits</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 95/100</div>
-          <div class="summary-text">Stochastic resetting drives quantum systems into nonequilibrium stationary states unreachable under uninterrupted unitary evolution, and their entanglement depends on whether the reset history is resolved or averaged over. We study this interplay in the transverse-field Ising chain, deriving closed-form results for two qubits and evaluating chains of up to 12 qubits exactly. In the two-qubit system, these closed-form results show that phase matching between energy eigenstates produces resonances, and their visibility in the stationary state is determined by the symmetry of the reset state.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Directly relevant to your quantum research agenda; highlights state-of-the-art benchmarks in qubit stability and algorithmic design.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Potential research gap: Evaluating noise resistance and error mitigation when interfacing this architecture with hybrid classical-quantum pipelines.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40647v1" target="_blank">Read, Allocate, Route: Role-Coupled Tokenization for Pixel-Space Generative Transformers</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 95/100</div>
-          <div class="summary-text">Pixel-space generative Transformers typically use one token per image patch, so capturing finer detail requires more tokens and makes global attention increasingly expensive. We observe that finer detail does not necessarily require more global communication: low-frequency structure benefits from global exchange, while high-frequency detail can be modeled locally. Based on this insight, we introduce SpecSlot, a pixel-space rectified-flow Transformer that decouples output detail from the length of the global attention sequence.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Valuable for updating your CS coursework curriculum and guiding university final-year projects.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Open research opportunity: Exploring empirical trade-offs between computational overhead and inference latency in production deployment.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40649v1" target="_blank">Rethinking Neural Thickets Without Weight Perturbations</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 95/100</div>
-          <div class="summary-text">The Neural Thickets hypothesis posits that pretrained language models lie in dense neighborhoods of task-specific experts in weight space, which random Gaussian perturbations can uncover. We reproduce the reported gains, but show that they do not require this geometric explanation. Perturbing a single decoder block already recovers much of the improvement, while keeping the model entirely frozen and adding a random bias to its output logits matches or exceeds full-weight perturbations on most reasoning tasks.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Useful for your NLP lectures and ongoing publications on efficient model architectures.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Possible publication opportunity: Investigating sample efficiency and domain adaptation across low-resource dialects or localized educational datasets.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40652v1" target="_blank">Reconstructing hidden observables via quantum snapshot thermometry</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 95/100</div>
-          <div class="summary-text">Projective snapshots are a standard readout tool for quantum simulators, but they directly probe only observables that are diagonal in the measurement basis. We show how local equilibration and an independently calibrated equilibrium equation of state can reveal otherwise hidden conserved-density profiles. We demonstrate numerically that such ``quantum snapshot thermometry&#39;&#39; can recover energy fronts and a diffusion constant, distinguish spin transport from energy spreading, and reveal conserved-charge profiles invisible in the initial measurements.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Directly relevant to your quantum research agenda; highlights state-of-the-art benchmarks in qubit stability and algorithmic design.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Potential research gap: Evaluating noise resistance and error mitigation when interfacing this architecture with hybrid classical-quantum pipelines.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40642v1" target="_blank">Comparison of entangling strategies for unitary synthesis</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 100/100</div>
-          <div class="summary-text">Trapped-ion quantum computers are promising as a platform for realizing quantum computational advantage. They promise long coherence times, near all-to-all connectivity, and potential multiqubit gates as distinguishing advantages compared to competing platforms. Regarding these advantages, it is crucial to understand the trade-offs between increasing engineering complexity and actual improvements in running quantum algorithms with a more flexible gate set.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Directly relevant to your quantum research agenda; highlights state-of-the-art benchmarks in qubit stability and algorithmic design.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Potential research gap: Evaluating noise resistance and error mitigation when interfacing this architecture with hybrid classical-quantum pipelines.</div>
-          
-        </div>
-      
-        <div class="card">
-          <div class="card-title">
-            <a href="https://arxiv.org/abs/2610.40655v1" target="_blank">Elucidating the Design Space of LM Data Attribution</a>
-          </div>
-          <div class="meta">arXiv &bull; Score: 100/100</div>
-          <div class="summary-text">Data attribution methods for Language Models (LMs) are typically evaluated using downstream tasks like fact retrieval. However, existing evaluations vary multiple dataset properties simultaneously, making it impossible to isolate exactly why an attribution algorithm fails. To diagnose these failures, we explore the design space of LLM data attribution, with a primary focus on evaluation.</div>
-          
-            <div class="why-it-matters"><strong>Relevance:</strong> Useful for your NLP lectures and ongoing publications on efficient model architectures.</div>
-          
-          
-            <div class="research-gap-box"><strong>Possible research gap / opportunity:</strong> Possible publication opportunity: Investigating sample efficiency and domain adaptation across low-resource dialects or localized educational datasets.</div>
-          
-        </div>
-      
-
-      <!-- 5. Jobs for You -->
-      <div class="section-title">Jobs for You (Pakistan: Lahore &amp; Gujranwala First)</div>
-      
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://navttc.gov.pk/careers/" target="_blank">Lead Technical Trainer - AI &amp; Cloud Computing</a>
-            </div>
-            <div class="meta">
-              <strong>NAVTTC (National Vocational &amp; Technical Training Commission)</strong> &bull;
-              <span class="badge badge-city">Lahore</span>
-              <span class="badge badge-eligible">
-                ELIGIBLE
-              </span>
-              &bull; Deadline: <strong>02 Nov 2026</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility Check:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 4.5 yrs: OK.
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://navttc.gov.pk/careers/" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://navttc.gov.pk/careers" class="btn-source" target="_blank">Original Source &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://www.ppsc.gop.pk" target="_blank">Lecturer in Computer Science (BPS-17)</a>
-            </div>
-            <div class="meta">
-              <strong>PPSC - Punjab Public Service Commission</strong> &bull;
-              <span class="badge badge-city">Lahore</span>
-              <span class="badge badge-eligible">
-                ELIGIBLE
-              </span>
-              &bull; Deadline: <strong>04 Nov 2026</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility Check:</strong> Max age 33, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 0.0 yrs required, you have 3.5 yrs: OK.
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://www.ppsc.gop.pk" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://www.ppsc.gop.pk/(S(1))/Jobs.aspx" class="btn-source" target="_blank">Original Source &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="mailto:research@uet.edu.pk" target="_blank">Research Associate (Quantum Computing &amp; NLP Lab)</a>
-            </div>
-            <div class="meta">
-              <strong>UET Lahore</strong> &bull;
-              <span class="badge badge-city">Lahore</span>
-              <span class="badge badge-eligible">
-                ELIGIBLE
-              </span>
-              &bull; Deadline: <strong>25 Oct 2026</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility Check:</strong> Max age 32, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 0.0 yrs required, you have 4.5 yrs: OK.
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="mailto:research@uet.edu.pk" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://jobs.uet.edu.pk" class="btn-source" target="_blank">Original Source &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="http://pu.edu.pk/careers/" target="_blank">Visiting Faculty - Programming &amp; Deep Learning</a>
-            </div>
-            <div class="meta">
-              <strong>University of the Punjab (PU)</strong> &bull;
-              <span class="badge badge-city">Lahore</span>
-              <span class="badge badge-eligible">
-                ELIGIBLE
-              </span>
-              &bull; Deadline: <strong>28 Oct 2026</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility Check:</strong> Max age 38, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 1.0 yrs required, you have 3.5 yrs: OK.
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="http://pu.edu.pk/careers/" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="http://pu.edu.pk/careers" class="btn-source" target="_blank">Original Source &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="mailto:hr@gift.edu.pk" target="_blank">Lecturer in Computer Science &amp; Artificial Intelligence</a>
-            </div>
-            <div class="meta">
-              <strong>GIFT University Gujranwala</strong> &bull;
-              <span class="badge badge-city">Gujranwala</span>
-              <span class="badge badge-eligible">
-                ELIGIBLE
-              </span>
-              &bull; Deadline: <strong>30 Oct 2026</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility Check:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 3.5 yrs: OK.
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="mailto:hr@gift.edu.pk" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://www.gift.edu.pk/careers" class="btn-source" target="_blank">Original Source &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://job.pk/apply" target="_blank">Software Lecturer Test</a>
-            </div>
-            <div class="meta">
-              <strong>Test University Lahore</strong> &bull;
-              <span class="badge badge-city">Lahore</span>
-              <span class="badge badge-maybe">
-                MAYBE
-              </span>
-              &bull; Deadline: <strong>25 Oct 2026</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility Check:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned.
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://job.pk/apply" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://job.pk/123" class="btn-source" target="_blank">Original Source &rarr;</a>
-            </div>
-          </div>
-        
-      
-
-      <!-- Closing Soon Jobs Sub-section -->
-      
-        <div style="margin-top: 20px;">
-          <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #dc2626; text-transform: uppercase; letter-spacing: 0.5px;">Closing Soon (Next 5 Days)</h4>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Lecturer in Computer Science &amp; Artificial Intelligence</strong> &bull; GIFT University Gujranwala (Gujranwala) &bull; Deadline: <strong style="color: #b91c1c;">30 Oct 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="mailto:hr@gift.edu.pk" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Visiting Faculty - Programming &amp; Deep Learning</strong> &bull; University of the Punjab (PU) (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">28 Oct 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="http://pu.edu.pk/careers/" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Research Associate (Quantum Computing &amp; NLP Lab)</strong> &bull; UET Lahore (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">25 Oct 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="mailto:research@uet.edu.pk" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Lecturer in Computer Science (BPS-17)</strong> &bull; PPSC - Punjab Public Service Commission (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">04 Nov 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="https://www.ppsc.gop.pk" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Lead Technical Trainer - AI &amp; Cloud Computing</strong> &bull; NAVTTC (National Vocational &amp; Technical Training Commission) (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">02 Nov 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="https://navttc.gov.pk/careers/" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Software Lecturer Test</strong> &bull; Test University Lahore (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">25 Oct 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="https://job.pk/apply" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Placement &amp; Corporate Relations Officer</strong> &bull; University of Gujrat (UOG) (Gujrat) &bull; Deadline: <strong style="color: #b91c1c;">05 Nov 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="https://uog.edu.pk/career" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-            <div style="padding: 10px 14px; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; margin-bottom: 8px; font-size: 13px;">
-              <strong>Lecturer in Data Science</strong> &bull; TestOrg Lahore (Lahore) &bull; Deadline: <strong style="color: #b91c1c;">30 Oct 2026</strong>
-              <div style="margin-top: 4px;">
-                <a href="https://pk.indeed.com/viewjob?jk=12345" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Now &rarr;</a>
-              </div>
-            </div>
-          
-        </div>
-      
-
-      <!-- Remote & AI-Automation Jobs -->
-      <div class="section-title">Remote &amp; AI-Automation Jobs (Worldwide &amp; Open to Pakistan)</div>
-      
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" target="_blank">RPA &amp; Python Workflow Automation Developer</a>
-            </div>
-            <div class="meta">
-              <strong>SyncFlow Solutions</strong> &bull;
-              <span class="badge badge-city">Worldwide Remote</span>
-              <span class="badge badge-maybe">
-                MAYBE
-              </span>
-              &bull; Score: <strong>100/100</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 4.5 yrs: OK. Worldwide remote: Open to applicants from Pakistan: OK..
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" class="btn-source" target="_blank">Source Link &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" target="_blank">LLM Fine-Tuning &amp; Evaluation Specialist</a>
-            </div>
-            <div class="meta">
-              <strong>DeepMetric Global</strong> &bull;
-              <span class="badge badge-city">Worldwide Remote</span>
-              <span class="badge badge-maybe">
-                MAYBE
-              </span>
-              &bull; Score: <strong>100/100</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" class="btn-source" target="_blank">Source Link &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" target="_blank">Generative AI &amp; Agentic Workflow Engineer</a>
-            </div>
-            <div class="meta">
-              <strong>AutomateAI Labs</strong> &bull;
-              <span class="badge badge-city">Worldwide Remote</span>
-              <span class="badge badge-maybe">
-                MAYBE
-              </span>
-              &bull; Score: <strong>100/100</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" class="btn-source" target="_blank">Source Link &rarr;</a>
-            </div>
-          </div>
-        
-          <div class="card">
-            <div class="card-title">
-              <a href="https://remotive.com/remote-jobs/artificial-intelligence/ai-trainer-video-annotation-2091161" target="_blank">AI Trainer - Video Annotation</a>
-            </div>
-            <div class="meta">
-              <strong>iMerit Technology</strong> &bull;
-              <span class="badge badge-city">Worldwide Remote</span>
-              <span class="badge badge-maybe">
-                MAYBE
-              </span>
-              &bull; Score: <strong>90/100</strong>
-            </div>
-            <div class="job-reason">
-              <strong>Eligibility &amp; Region Check:</strong> Age limit: Not mentioned. Qualification: Not mentioned. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
-            </div>
-            <div style="margin-top: 10px;">
-              <a href="https://remotive.com/remote-jobs/artificial-intelligence/ai-trainer-video-annotation-2091161" class="btn-apply" target="_blank">Apply / View</a>
-              <a href="https://remotive.com/remote-jobs/artificial-intelligence/ai-trainer-video-annotation-2091161" class="btn-source" target="_blank">Source Link &rarr;</a>
-            </div>
-          </div>
-        
-      
-
-      <!-- 6. Quote of the Day -->
-      <div class="quote-box">
-        "In quantum computing, physical qubit counts grab headlines, but logical error-corrected qubits and transversal gate fidelity are the real milestones."
-        <div class="quote-author">&mdash; John Preskill (Caltech Quantum Colloquium)</div>
+      <!-- 2. Frontier AI & Global Tech Race -->
+      <div class="section-header">
+        <h2 class="section-title">🚀 1. عالمی اے آئی و فرنٹیئر ٹیک انقلاب (AI & Tech Race)</h2>
       </div>
 
-      <!-- 7. Read Later List -->
       
+      <div class="card">
+        <div style="margin-bottom: 6px;">
+          <span class="badge badge-primary">OpenAI &amp; Anthropic</span>
+          <span style="font-size: 12px; color: #64748b;">ذریعہ: Frontier AI Labs</span>
+        </div>
+        <h3 class="card-title">اوپن اے آئی اور اینتھروپک کا ریزننگ اور ایجنٹک کوڈنگ مقابلہ</h3>
+        <p class="card-text">اوپن اے آئی کے نئے ماڈلز میں تصدیقی زنجیر (Verifier Circuits) اور ٹیسٹ ٹائم کمپیوٹ کو وسعت دی گئی ہے جس سے سٹرکچرڈ کوڈنگ اور سسٹمز ڈیزائن میں غلطیوں کی شرح 60% تک کم ہوئی ہے۔ دوسری جانب اینتھروپک کا کلاڈ (Claude Computer Use) براہِ راست کمپیوٹر اسکرین، ٹرمینل اور براؤزر پر کلک کر کے کام کرنے کے قابل ہو چکا ہے۔ پچھلے ورژنز کے برعکس، یہ ماڈلز محض ٹیکسٹ تجویز نہیں کرتے بلکہ مکمل سافٹ ویئر فیچرز خود بخود لکھ کر، ٹیسٹ کر کے پش کرنے کی صلاحیت رکھتے ہیں۔</p>
+        <div class="takeaway-box">
+          <strong>📌 اکیڈمک و کیریئر ٹیک اوے:</strong> اکیڈمک نقطہ نظر سے، اپنے طلباء کو پرامپٹ انجینئرنگ کے روایتی طریقوں کے بجائے ایجنٹک آرکیٹیکچر (Agentic Workflows) اور لوپنگ سسٹمز سکھانے کا وقت آ چکا ہے۔
+        </div>
+      </div>
+      
+      <div class="card">
+        <div style="margin-bottom: 6px;">
+          <span class="badge badge-primary">Elon Musk &amp; Tesla / xAI</span>
+          <span style="font-size: 12px; color: #64748b;">ذریعہ: Tesla &amp; xAI</span>
+        </div>
+        <h3 class="card-title">ایلون مسک اور ٹیسلا: آپٹیمس روبوٹ (Optimus) اور کولوسس کلسٹر</h3>
+        <p class="card-text">ایلون مسک کی xAI نے ممفس (Memphis) میں دنیا کا سب سے بڑا 100k Nvidia H100 GPU کلسٹر &#39;Colossus&#39; مکمل فعال کر دیا ہے جسے آئندہ مہینوں میں 200k تک بڑھایا جا رہا ہے۔ اس کے ساتھ ٹیسلا کی فیکٹریوں میں &#39;Optimus Gen 3&#39; ہیومنائڈ روبوٹس نے خودکار طور پر بیٹری سیلز منتقل کرنے کا کام شروع کر دیا ہے۔ مسک کا دعویٰ ہے کہ خودمختار روبوٹکس اور گروک (Grok) کا امتزاج معیشت میں پیداواری صلاحیت کو لامحدود کر دے گا۔</p>
+        <div class="takeaway-box">
+          <strong>📌 اکیڈمک و کیریئر ٹیک اوے:</strong> کمپیوٹر ویژن اور ایمبیڈڈ سسٹمز کے طلباء کے لیے فزیکل روبوٹکس اور ری انفورسمنٹ لرننگ میں پروجیکٹس شروع کرنے کا یہ بہترین موقع ہے۔
+        </div>
+      </div>
+      
+      <div class="card">
+        <div style="margin-bottom: 6px;">
+          <span class="badge badge-primary">China Robotics Surge</span>
+          <span style="font-size: 12px; color: #64748b;">ذریعہ: Global Tech Review</span>
+        </div>
+        <h3 class="card-title">چائنا کا روبوٹکس اور آٹومیشن انقلاب: فیکٹریوں میں ہیومنائڈ روبوٹس کی یلغار</h3>
+        <p class="card-text">چین کی وزارتِ صنعت و ٹیکنالوجی (MIIT) کی خصوصی گائیڈ لائنز کے تحت یونٹری (Unitree G1)، فوئریئر اور ایگی بوٹ (AgiBot) نے 16,000 ڈالرز کی ریکارڈ کم قیمت پر صنعتی ہیومنائڈ روبوٹس متعارف کرا دیے ہیں۔ شنگھائی اور شینزین کی آٹوموٹو فیکٹریوں میں انسانی مزدوروں کے ساتھ مکمل ہم آہنگی کے ساتھ کام کرنے والے ان روبوٹس کے لیے اوپن سورس فریم ورکس اور &#39;DeepSeek&#39; کے لائٹ ویٹ ماڈلز ایج ہارڈویئر پر کامیابی سے انٹیگریٹ کیے جا رہے ہیں۔</p>
+        <div class="takeaway-box">
+          <strong>📌 اکیڈمک و کیریئر ٹیک اوے:</strong> مغربی ممالک ہارڈویئر کی گرانی کا شکار ہیں جبکہ چین اوپن ماڈلز اور سستے سینسرز کے ذریعے آٹومیشن میں تیزی سے برتری حاصل کر رہا ہے۔
+        </div>
+      </div>
+      
+      <div class="card">
+        <div style="margin-bottom: 6px;">
+          <span class="badge badge-primary">Quantum &amp; Chips</span>
+          <span style="font-size: 12px; color: #64748b;">ذریعہ: MIT Technology Review / arXiv</span>
+        </div>
+        <h3 class="card-title">کوانٹم کمپیوٹنگ و سیمی کنڈکٹر ہارڈویئر سنگ میل</h3>
+        <p class="card-text">انوڈیا کے بلیک ویل (Blackwell B200) کی کمرشل شپمنٹس اور کوانٹم پروسیسرز پر ایرر کریکٹنگ کوڈز (Surface Codes) میں 99.8% فیڈیلٹی حاصل کر لی گئی ہے۔ ہائبرڈ کلاسیکل-کوانٹم الگورتھمز اب لارج لینگویج ماڈلز کے متوازی الجبرا اور انکرپشن بریک ڈاؤن کے لیے سنجیدہ تجربات کے مرحلے میں داخل ہو چکے ہیں۔</p>
+        <div class="takeaway-box">
+          <strong>📌 اکیڈمک و کیریئر ٹیک اوے:</strong> کوانٹم کمپیوٹنگ کے محققین کے لیے کوانٹم سرکٹ کمپائلیشن اور شور (Noise Mitigation) پر مقالہ لکھنا اس وقت دنیا کے ممتاز جرائد میں اشاعت کی ضمانت ہے۔
+        </div>
+      </div>
+      
+
+      <!-- 3. Academic Watch, IEEE & HEC Pakistan -->
+      <div class="section-header">
+        <h2 class="section-title">🏛️ 2. اکیڈمک واچ، ریسرچ گرانٹس اور IEEE کانفرنسز (پاکستان)</h2>
+      </div>
+
+      
+      <div style="margin-bottom: 20px;">
+        <h4 style="font-size: 16px; color: #0284c7; margin: 10px 0 8px 0; border-right: 3px solid #0284c7; padding-right: 8px;">
+          IEEE کانفرنسز برائے پاکستان (کال فار پیپرز اور ڈیڈ لائنز)
+        </h4>
+
+        
+        <div class="card" style="border-right: 4px solid #f59e0b;">
+          <h4 style="margin: 0 0 6px 0; font-size: 15.5px; color: #0f172a;">FIT 2026 (Frontiers of Information Technology)</h4>
+          
+          
+          <div style="font-size: 13.5px; color: #475569; margin-bottom: 4px;">
+            <strong>🎯 ٹریکس:</strong> Artificial Intelligence, Data Science, Software Engineering, Networks | <strong>انڈیکس:</strong> IEEE Xplore &amp; Scopus Indexed
+          </div>
+          <div style="font-size: 13.5px; color: #b45309; font-weight: bold;">
+            ⏳ تاریخ / ڈیڈ لائن: 15 نومبر 2026 (اگلے سالانہ ایڈیشن کی ابتدائی سبمیشنز)
+          </div>
+          
+
+          
+
+          <a href="https://fit.edu.pk" target="_blank" class="btn-apply" style="margin-top: 8px;">تفصیلات / پورٹل دیکھیں &larr;</a>
+        </div>
+        
+        <div class="card" style="border-right: 4px solid #f59e0b;">
+          <h4 style="margin: 0 0 6px 0; font-size: 15.5px; color: #0f172a;">IEEE INMIC (International Multi-Topic Conference)</h4>
+          
+          
+          <div style="font-size: 13.5px; color: #475569; margin-bottom: 4px;">
+            <strong>🎯 ٹریکس:</strong> Emerging Technologies, Machine Learning, Embedded Systems | <strong>انڈیکس:</strong> IEEE Xplore Indexed
+          </div>
+          <div style="font-size: 13.5px; color: #b45309; font-weight: bold;">
+            ⏳ تاریخ / ڈیڈ لائن: فارم و کال فار پیپرز جاری - تفصیلی ڈرافٹ تیار رکھیں
+          </div>
+          
+
+          
+
+          <a href="https://ieeepakistan.org" target="_blank" class="btn-apply" style="margin-top: 8px;">تفصیلات / پورٹل دیکھیں &larr;</a>
+        </div>
+        
+        <div class="card" style="border-right: 4px solid #f59e0b;">
+          <h4 style="margin: 0 0 6px 0; font-size: 15.5px; color: #0f172a;">IBCAST (International Bhurban Conference on Applied Sciences &amp; Tech)</h4>
+          
+          
+          <div style="font-size: 13.5px; color: #475569; margin-bottom: 4px;">
+            <strong>🎯 ٹریکس:</strong> Cyber Security, Quantum Tech, Autonomous Robotics | <strong>انڈیکس:</strong> IEEE Indexed
+          </div>
+          <div style="font-size: 13.5px; color: #b45309; font-weight: bold;">
+            ⏳ تاریخ / ڈیڈ لائن: سالانہ کال فار پیپرز فعال
+          </div>
+          
+
+          
+
+          <a href="https://ibcast.org.pk" target="_blank" class="btn-apply" style="margin-top: 8px;">تفصیلات / پورٹل دیکھیں &larr;</a>
+        </div>
+        
+      </div>
+      
+      <div style="margin-bottom: 20px;">
+        <h4 style="font-size: 16px; color: #0284c7; margin: 10px 0 8px 0; border-right: 3px solid #0284c7; padding-right: 8px;">
+          ایچ ای سی (HEC) ریسرچ گرانٹس اور فیلوشپ مواقع
+        </h4>
+
+        
+        <div class="card" style="border-right: 4px solid #f59e0b;">
+          <h4 style="margin: 0 0 6px 0; font-size: 15.5px; color: #0f172a;">IRSIP (International Research Support Initiative Program)</h4>
+          
+          
+
+          
+          <p class="card-text">ایچ ای سی پاکستان کا فلیگ شپ پروگرام جس کے تحت ایم ایس / پی ایچ ڈی محققین کو دنیا کی ٹاپ 500 یونیورسٹیوں میں 6 ماہ کی مکمل فنڈڈ ریسرچ فیلوشپ اور وظیفہ دیا جاتا ہے۔</p>
+          <div style="font-size: 13.5px; color: #059669; font-weight: 600;">
+            ✅ اہلیت: پاکستانی جامعات کے مستقل فیکلٹی ممبران و محققین اہل ہیں
+          </div>
+          
+
+          <a href="https://hec.gov.pk/english/scholarships-fellowships/irsip" target="_blank" class="btn-apply" style="margin-top: 8px;">تفصیلات / پورٹل دیکھیں &larr;</a>
+        </div>
+        
+        <div class="card" style="border-right: 4px solid #f59e0b;">
+          <h4 style="margin: 0 0 6px 0; font-size: 15.5px; color: #0f172a;">NRPU (National Research Program for Universities)</h4>
+          
+          
+
+          
+          <p class="card-text">یونیورسٹی اساتذہ اور پرنسپل انویسٹی گیٹرز (PI) کے لیے 2 کروڑ روپے تک کی ریسرچ گرانٹ، خاص طور پر اپلائیڈ اے آئی، ہیلتھ کیئر اور خودکار سسٹمز کے لیے۔</p>
+          <div style="font-size: 13.5px; color: #059669; font-weight: 600;">
+            ✅ اہلیت: یونیورسٹی لیکچرار / اسسٹنٹ پروفیسر درخواست دینے کے مجاز ہیں
+          </div>
+          
+
+          <a href="https://hec.gov.pk/english/services/faculty/NRPU" target="_blank" class="btn-apply" style="margin-top: 8px;">تفصیلات / پورٹل دیکھیں &larr;</a>
+        </div>
+        
+        <div class="card" style="border-right: 4px solid #f59e0b;">
+          <h4 style="margin: 0 0 6px 0; font-size: 15.5px; color: #0f172a;">HEC فیکلٹی ڈویلپمنٹ پروگرام (FDP) اور ٹریننگ ورکشاپس</h4>
+          
+          
+
+          
+          <p class="card-text">پروگرامنگ اور اے آئی اساتذہ کے لیے جدید پیڈاگوجی (Pedagogy) اور نیشنل کمپوٹنگ ایجوکیشن ایکریڈیٹیشن کونسل (NCEAC) کے معیار کے مطابق نصاب سازی کی ٹریننگ۔</p>
+          <div style="font-size: 13.5px; color: #059669; font-weight: 600;">
+            ✅ اہلیت: پبلک و پرائیویٹ سیکٹر یونیورسٹی اساتذہ
+          </div>
+          
+
+          <a href="https://hec.gov.pk/english/services/faculty/fdp" target="_blank" class="btn-apply" style="margin-top: 8px;">تفصیلات / پورٹل دیکھیں &larr;</a>
+        </div>
+        
+      </div>
+      
+
+      <!-- 4. Open Research Gaps -->
+      <div class="section-header">
+        <h2 class="section-title">🔬 3. اشاعت کے لیے کھلے ریسرچ گیپس (Open Research Gaps)</h2>
+      </div>
+
+      
+      <div class="card" style="border-right: 4px solid #ea580c;">
+        <span class="badge badge-academic">Natural Language Processing (اردو و مقامی زبانیں)</span>
+        <h4 style="margin: 8px 0 4px 0; font-size: 15px; color: #0f172a;">موضوع: Reasoning Verifiers in Low-Resource Dialects</h4>
+        <div class="gap-box">
+          <strong>⚡ تحقیق کا موقع (Gap):</strong> اوپن اے آئی اور کلاڈ کے ماڈلز انگریزی میں ٹیسٹ ٹائم کمپیوٹ کی بنیاد پر درست ریزننگ کر لیتے ہیں، مگر اردو اور علاقائی زبانوں میں لاجیکل فالسیز (Logical Fallacies) پکڑنے میں فیل ہو جاتے ہیں۔ مقامی ڈیٹاسیٹ پر ویریفائر فائن ٹیوننگ پر پیپر فوری طور پر IEEE میں قابلِ اشاعت ہے۔
+        </div>
+      </div>
+      
+      <div class="card" style="border-right: 4px solid #ea580c;">
+        <span class="badge badge-academic">Quantum Computing &amp; ML</span>
+        <h4 style="margin: 8px 0 4px 0; font-size: 15px; color: #0f172a;">موضوع: Error Mitigation in Hybrid Variational Quantum Classifiers (VQC)</h4>
+        <div class="gap-box">
+          <strong>⚡ تحقیق کا موقع (Gap):</strong> موجودہ NISQ عہد کے کوانٹم پروسیسرز پر ویری ایشنل سرکٹس شور کے باعث درستگی کھو دیتے ہیں۔ کلاسیکل ایل ایل ایمز کو ایجنٹ بنا کر کوانٹم گیٹس کی پوزیشن درست کرنے پر دنیا میں ابھی صرف گنتی کے پیپرز ہیں — یہ ایک کھلا اور شاندار ریسرچ گیپ ہے۔
+        </div>
+      </div>
+      
+      <div class="card" style="border-right: 4px solid #ea580c;">
+        <span class="badge badge-academic">Agentic AI &amp; Workflow Automation</span>
+        <h4 style="margin: 8px 0 4px 0; font-size: 15px; color: #0f172a;">موضوع: Deterministic Rollback in Self-Healing Multi-Agent Systems</h4>
+        <div class="gap-box">
+          <strong>⚡ تحقیق کا موقع (Gap):</strong> n8n اور LangChain کے آٹومیشن ایجنٹس جب پیچیدہ کاروباری لاجک میں ایرر کرتے ہیں تو ان کا ہالوسینیشن کنٹرول نہیں ہوتا۔ خودکار رول بیک میکانزم پر ایک مقالہ اپلائیڈ سوفٹ ویئر انجینئرنگ کے اعلیٰ جرائد میں قبول ہو سکتا ہے۔
+        </div>
+      </div>
+      
+
+      <!-- 5. Curated Jobs Watch -->
+      <div class="section-header">
+        <h2 class="section-title">💼 4. کیریئر و جابز واچ (لاہور، گوجرانوالہ، اسلام آباد اور ریموٹ)</h2>
+      </div>
+
+      <h4 style="font-size: 15px; color: #475569; margin: 12px 0 8px 0;">🏫 اکیڈمک، لیکچرار اور پلیسمنٹ اسامیاں:</h4>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Lead Technical Trainer - AI &amp; Cloud Computing</h4>
+          <span class="badge badge-eligible">ELIGIBLE</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 ادارہ: NAVTTC (National Vocational &amp; Technical Training Commission) | 📍 شہر: Lahore | ⏰ ڈیڈ لائن: 02 Nov 2026
+        </div>
+        <div style="font-size: 13.5px; color: #059669; background: #f0fdf4; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 4.5 yrs: OK.
+        </div>
+        <a href="https://navttc.gov.pk/careers/" target="_blank" class="btn-apply">اپلائی کریں / تفصیل دیکھیں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Lecturer in Computer Science (BPS-17)</h4>
+          <span class="badge badge-eligible">ELIGIBLE</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 ادارہ: PPSC - Punjab Public Service Commission | 📍 شہر: Lahore | ⏰ ڈیڈ لائن: 04 Nov 2026
+        </div>
+        <div style="font-size: 13.5px; color: #059669; background: #f0fdf4; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Max age 33, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 0.0 yrs required, you have 3.5 yrs: OK.
+        </div>
+        <a href="https://www.ppsc.gop.pk" target="_blank" class="btn-apply">اپلائی کریں / تفصیل دیکھیں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Visiting Faculty - Programming &amp; Deep Learning</h4>
+          <span class="badge badge-eligible">ELIGIBLE</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 ادارہ: University of the Punjab (PU) | 📍 شہر: Lahore | ⏰ ڈیڈ لائن: 28 Oct 2026
+        </div>
+        <div style="font-size: 13.5px; color: #059669; background: #f0fdf4; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Max age 38, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 1.0 yrs required, you have 3.5 yrs: OK.
+        </div>
+        <a href="http://pu.edu.pk/careers/" target="_blank" class="btn-apply">اپلائی کریں / تفصیل دیکھیں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Lecturer in Computer Science &amp; Artificial Intelligence</h4>
+          <span class="badge badge-eligible">ELIGIBLE</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 ادارہ: GIFT University Gujranwala | 📍 شہر: Gujranwala | ⏰ ڈیڈ لائن: 30 Oct 2026
+        </div>
+        <div style="font-size: 13.5px; color: #059669; background: #f0fdf4; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 3.5 yrs: OK.
+        </div>
+        <a href="mailto:hr@gift.edu.pk" target="_blank" class="btn-apply">اپلائی کریں / تفصیل دیکھیں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Software Lecturer Test</h4>
+          <span class="badge badge-eligible">MAYBE</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 ادارہ: Test University Lahore | 📍 شہر: Lahore | ⏰ ڈیڈ لائن: 25 Oct 2026
+        </div>
+        <div style="font-size: 13.5px; color: #059669; background: #f0fdf4; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Max age 35, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned.
+        </div>
+        <a href="https://job.pk/apply" target="_blank" class="btn-apply">اپلائی کریں / تفصیل دیکھیں &larr;</a>
+      </div>
+      
+
+      <h4 style="font-size: 15px; color: #475569; margin: 18px 0 8px 0;">🌐 ریموٹ اے آئی آٹومیشن، ویب ڈویلپمنٹ اور ڈیجیٹل مارکیٹنگ:</h4>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">RPA &amp; Python Workflow Automation Developer</h4>
+          <span class="badge badge-primary">Remote</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 کمپنی: SyncFlow Solutions | 🌍 لوکیشن: Remote (Worldwide Remote)
+        </div>
+        <div style="font-size: 13.5px; color: #0369a1; background: #f0f9ff; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. 2.0 yrs required, you have 4.5 yrs: OK. Worldwide remote: Open to applicants from Pakistan: OK..
+        </div>
+        <a href="https://weworkremotely.com/jobs/syncflow-rpa-developer" target="_blank" class="btn-apply">اپلائی کریں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">LLM Fine-Tuning &amp; Evaluation Specialist</h4>
+          <span class="badge badge-primary">Remote</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 کمپنی: DeepMetric Global | 🌍 لوکیشن: Remote (Worldwide Remote)
+        </div>
+        <div style="font-size: 13.5px; color: #0369a1; background: #f0f9ff; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
+        </div>
+        <a href="https://remotive.com/remote-jobs/deepmetric-llm-specialist" target="_blank" class="btn-apply">اپلائی کریں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Generative AI &amp; Agentic Workflow Engineer</h4>
+          <span class="badge badge-primary">Remote</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 کمپنی: AutomateAI Labs | 🌍 لوکیشن: Remote (Worldwide Remote)
+        </div>
+        <div style="font-size: 13.5px; color: #0369a1; background: #f0f9ff; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
+        </div>
+        <a href="https://remoteok.com/remote-jobs/automateai-agent-engineer" target="_blank" class="btn-apply">اپلائی کریں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Research Associate (Quantum Computing &amp; NLP Lab)</h4>
+          <span class="badge badge-primary">Full-Time</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 کمپنی: UET Lahore | 🌍 لوکیشن: Lahore (Worldwide Remote)
+        </div>
+        <div style="font-size: 13.5px; color: #0369a1; background: #f0f9ff; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Max age 32, you are 28: OK. MS/MPhil required, you have MS/MPhil: OK. 0.0 yrs required, you have 4.5 yrs: OK.
+        </div>
+        <a href="mailto:research@uet.edu.pk" target="_blank" class="btn-apply">اپلائی کریں &larr;</a>
+      </div>
+      
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h4 style="margin: 0; font-size: 15.5px; color: #0f172a;">Digital Marketing and AI Content Specialist</h4>
+          <span class="badge badge-primary">Remote</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 6px;">
+          🏢 کمپنی: Nexus Growth Global | 🌍 لوکیشن: Remote (Worldwide Remote)
+        </div>
+        <div style="font-size: 13.5px; color: #0369a1; background: #f0f9ff; padding: 6px 10px; border-radius: 4px; margin: 6px 0;">
+          💡 <strong>اہلیت کا جائزہ:</strong> Age limit: Not mentioned. MS/MPhil required, you have MS/MPhil: OK. Experience: Not mentioned. Worldwide remote: Open to applicants from Pakistan: OK..
+        </div>
+        <a href="https://remoteok.com/remote-jobs/nexus-digital-marketing-ai" target="_blank" class="btn-apply">اپلائی کریں &larr;</a>
+      </div>
+      
+
+      <!-- Large Portal Button -->
+      <a href="https://zubairiteng.github.io/devresearch-daily-briefing/" target="_blank" class="btn-portal">
+        🔗 ڈیو ریسرچ لائیو پبلک پورٹل کھولیں (کلک کریں)
+      </a>
+
     </div>
 
     <!-- Footer -->
     <div class="footer">
-      DevResearch Daily Briefing &bull; Configured for Pakistan (Asia/Karachi 10:00 AM)<br>
-      Manage your profile, sources, or job tracking in the local dashboard.
+      <strong>DevResearch Daily Briefing</strong> &bull; خودکار روزانہ بریفنگ سسٹم برائے پروفیسر زبیر احمد<br>
+      IISAT یونیورسٹی / NAVTTC ٹریننگ پارٹنر &bull; ترسیل وقت: روزانہ صبح 10:00 بجے (PKT)<br>
+      <span style="font-size: 11px; color: #94a3b8;">یہ سسٹم خودکار ڈیٹا انڈیکسنگ، جاب ایلیجیبلٹی اور اے آئی سنتھیسس کے ذریعے تیار کیا گیا ہے۔</span>
     </div>
+
   </div>
+
 </body>
 </html>

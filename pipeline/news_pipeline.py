@@ -51,9 +51,11 @@ class NewsPipeline:
         unique_items = deduplicate_news(raw_items, similarity_threshold=0.65)
         logger.info(f"Unique items after deduplication: {len(unique_items)}")
 
-        # 4. Classify & Score
+        # 4. Classify & Score (Strictly excluding items already emailed in past digests)
         scored_candidates: List[Tuple[RawItem, int, str]] = []
         for item in unique_items:
+            if NewsRepository.is_url_already_emailed(item.url):
+                continue
             category = classify_item(item)
             item.category = category
             score = score_item_relevance(item, self.profile)

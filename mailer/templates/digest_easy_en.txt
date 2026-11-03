@@ -1,0 +1,123 @@
+================================================================================
+DEVRESEARCH DAILY BRIEFING - {{ date_str }}
+Prepared for: {{ user_name }} ({{ user_profile_line }})
+Public Dashboard: {{ portal_url }}
+================================================================================
+
+{% if concept_of_the_day %}
+--------------------------------------------------------------------------------
+💡 LAYMAN CONCEPT OF THE DAY: {{ concept_of_the_day.term }}
+--------------------------------------------------------------------------------
+{{ concept_of_the_day.layman_title }}
+{{ concept_of_the_day.simple_explanation }}
+👉 For Your Students / Lectures: {{ concept_of_the_day.takeaway }}
+{% endif %}
+
+--------------------------------------------------------------------------------
+📌 TODAY AT A GLANCE
+--------------------------------------------------------------------------------
+{% for bullet in today_in_brief %}
+* {{ bullet }}
+{% endfor %}
+
+--------------------------------------------------------------------------------
+1. 🚀 FRONTIER AI & ROBOTICS WATCH
+--------------------------------------------------------------------------------
+{% for story in frontier_ai_briefs %}
+* [{{ story.tag }}] {{ story.headline }}
+  Source: {{ story.source }} | {{ story.link }}
+  {{ story.summary }}
+  {% if story.layman_terms %}
+  📌 IN SIMPLE TERMS:
+  {% for lt in story.layman_terms %}
+    - {{ lt.term }}: {{ lt.explanation }}
+  {% endfor %}
+  {% endif %}
+  Takeaway: {{ story.why_it_matters }}
+
+{% endfor %}
+
+--------------------------------------------------------------------------------
+2. 📰 TODAY'S FRESH INDUSTRY NEWS (NON-REPEATING)
+--------------------------------------------------------------------------------
+{% for item in fresh_news_items %}
+* {{ item.title }}
+  Source: {{ item.source_name }} | Score: {{ item.score }}/100 | {{ item.url }}
+  {{ item.summary }}
+  {% if item.layman_terms %}
+  📌 IN SIMPLE TERMS:
+  {% for lt in item.layman_terms %}
+    - {{ lt.term }}: {{ lt.explanation }}
+  {% endfor %}
+  {% endif %}
+  Takeaway: {{ item.why_it_matters }}
+  {% if item.research_gap %}
+  Research Gap: {{ item.research_gap }}
+  {% endif %}
+
+{% endfor %}
+
+--------------------------------------------------------------------------------
+3. 🎓 PAKISTAN ACADEMIC & RESEARCH OPPORTUNITIES
+--------------------------------------------------------------------------------
+{% for program in academic_programs %}
+=== {{ program.title }} ===
+{% for itm in program.details_list %}
+- {{ itm.name }}
+  {% if itm.tracks %}Tracks: {{ itm.tracks }}{% endif %}
+  {% if itm.details %}Details: {{ itm.details }}{% endif %}
+  {% if itm.funding %}Funding: {{ itm.funding }}{% endif %}
+  {% if itm.eligibility %}Eligibility: {{ itm.eligibility }}{% endif %}
+  {% if itm.layman_note %}Note: {{ itm.layman_note }}{% endif %}
+  Link: {{ itm.link or itm.portal }}
+
+{% endfor %}
+{% endfor %}
+
+--------------------------------------------------------------------------------
+4. 🔬 OPEN RESEARCH GAPS (READY FOR PUBLICATION)
+--------------------------------------------------------------------------------
+{% for gap in research_gaps %}
+* [{{ gap.area }}] {{ gap.topic }}
+  {{ gap.gap_description }}
+  {% if gap.layman_terms %}
+  📌 IN SIMPLE TERMS:
+  {% for lt in gap.layman_terms %}
+    - {{ lt.term }}: {{ lt.explanation }}
+  {% endfor %}
+  {% endif %}
+
+{% endfor %}
+
+--------------------------------------------------------------------------------
+5. 💼 CAREER & PLACEMENT OPPORTUNITIES FOR YOU
+--------------------------------------------------------------------------------
+--- University & Placement Roles ---
+{% for job in academic_jobs %}
+* {{ job.title }} - {{ job.organization }} ({{ job.city }})
+  Status: {{ job.eligibility_status }} | Deadline: {{ job.deadline }}
+  Check: {{ job.eligibility_reason }}
+  Apply: {{ job.apply_link or job.primary_url }}
+
+{% endfor %}
+
+--- Remote AI Automation & Web Development ---
+{% for job in tech_remote_jobs %}
+* {{ job.title }} - {{ job.organization }} ({{ job.city }})
+  Status: {{ job.eligibility_status }} | Deadline: {{ job.deadline }}
+  Check: {{ job.eligibility_reason }}
+  Apply: {{ job.apply_link or job.primary_url }}
+
+{% endfor %}
+
+{% if closing_soon_jobs %}
+--- ⚠️ CLOSING SOON (NEXT 5 DAYS) ---
+{% for cs in closing_soon_jobs %}
+! {{ cs.title }} - {{ cs.organization }} (Deadline: {{ cs.deadline }})
+  Link: {{ cs.apply_link or cs.primary_url }}
+{% endfor %}
+{% endif %}
+
+================================================================================
+Access live updates anytime on your public portal: {{ portal_url }}
+================================================================================

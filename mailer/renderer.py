@@ -1,10 +1,11 @@
-"""Template renderer for HTML and Plain-Text email digests (English & Urdu)."""
+"""Template renderer for HTML and Plain-Text email digests (Easy English, Classic English & Urdu)."""
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from jinja2 import Environment, FileSystemLoader
 from database.models import NewsItemModel, JobItemModel
 from mailer.urdu_synthesizer import UrduDigestSynthesizer
+from mailer.easy_english_synthesizer import EasyEnglishSynthesizer
 
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
 jinja_env = Environment(
@@ -40,9 +41,31 @@ class DigestRenderer:
     def __init__(self):
         self.html_tmpl = jinja_env.get_template("digest.html")
         self.txt_tmpl = jinja_env.get_template("digest.txt")
+        self.easy_en_html_tmpl = jinja_env.get_template("digest_easy_en.html")
+        self.easy_en_txt_tmpl = jinja_env.get_template("digest_easy_en.txt")
         self.urdu_html_tmpl = jinja_env.get_template("digest_urdu.html")
         self.urdu_txt_tmpl = jinja_env.get_template("digest_urdu.txt")
         self.error_tmpl = jinja_env.get_template("error_alert.html")
+
+    def render_easy_english_digest(
+        self,
+        news_items: List[NewsItemModel],
+        jobs: List[JobItemModel],
+        closing_soon: List[JobItemModel],
+        date_obj: datetime = None
+    ) -> Tuple[str, str, str]:
+        """Renders clear, easy-to-read English daily briefing with layman explanations."""
+        dt = date_obj or datetime.now()
+        context = EasyEnglishSynthesizer.synthesize(
+            news_items=news_items,
+            jobs=jobs,
+            closing_soon=closing_soon,
+            date_obj=dt
+        )
+        subject = context["subject"]
+        html_body = self.easy_en_html_tmpl.render(context)
+        txt_body = self.easy_en_txt_tmpl.render(context)
+        return subject, html_body, txt_body
 
     def render_urdu_digest(
         self,
@@ -74,6 +97,14 @@ class DigestRenderer:
         language: str = "en"
     ) -> Tuple[str, str, str]:
         """Returns (subject, html_content, text_content). Defaults to English for backwards compatibility."""
+        if language in ("easy_en", "easy", "plain_en"):
+            return self.render_easy_english_digest(
+                news_items=news_items,
+                jobs=jobs,
+                closing_soon=closing_soon,
+                date_obj=date_obj
+            )
+
         if language == "ur":
             return self.render_urdu_digest(
                 news_items=news_items,
@@ -98,52 +129,47 @@ class DigestRenderer:
                 if "Release:" not in item.title:
                     fresh_candidate = item.title
                     break
-            top_headline = fresh_candidate or news_items[0].title
-            if len(top_headline) > 65:
-                top_headline = top_headline[:62] + "..."
+            if fresh_candidate:
+                words = fresh_candidate.split()
+                top_headline = " ".join(words[:10])
 
-        subject = f"DevResearch Daily | {dt.strftime('%b %d, %Y')} | {top_headline}"
+        short_date = dt.strftime("%b %d, %Y")
+        subject = f"DevResearch Daily | {short_date} | {top_headline}"
 
-        # 1. Today in brief (3 lines)
+        # 3-bullet summary for 'Today in Brief'
         today_in_brief = []
         if ai_items:
-            today_in_brief.append(f"AI/LLM: {ai_items[0].title}")
+            today_in_brief.append(f"AI & LLMs: {ai_items[0].title}")
         if dev_items:
-            today_in_brief.append(f"Software & Cloud: {dev_items[0].title}")
+            today_in_brief.append(f"Cloud/Dev: {dev_items[0].title}")
         if research_items:
             today_in_brief.append(f"Research: {research_items[0].title}")
-        while len(today_in_brief) < 3 and len(news_items) > len(today_in_brief):
-            today_in_brief.append(news_items[len(today_in_brief)].title)
         if not today_in_brief:
             today_in_brief = [
-                "Comprehensive review of LLM releases, cloud frameworks, and quantum research.",
-                "Targeted job opportunities in Lahore, Gujranwala, and academic institutions.",
-                "Identified open research gaps ready for publication."
+                "New models and updates gathered across AI labs.",
+                "Cloud infrastructure releases and tooling updates.",
+                "Latest papers evaluated for quantum and NLP research."
             ]
 
-        # 5. Filter Jobs: Only ELIGIBLE or MAYBE, NEVER NOT ELIGIBLE.
-        pakistan_jobs = [j for j in jobs if j.city != "Remote" and j.eligibility_status in ("ELIGIBLE", "MAYBE")]
-        pakistan_jobs.sort(key=lambda j: (0 if j.eligibility_status == "ELIGIBLE" else 1, -j.relevance_score))
+        # Rotate tech quote of the day
+        quote_index = dt.timetuple().tm_yday % len(CURATED_TECH_QUOTES)
+        quote_of_the_day = CURATED_TECH_QUOTES[quote_index]
 
-        remote_ai_jobs = [j for j in jobs if j.city == "Remote" and j.eligibility_status in ("ELIGIBLE", "MAYBE")]
-        remote_ai_jobs.sort(key=lambda j: (0 if j.eligibility_status == "ELIGIBLE" else 1, -j.relevance_score))
+        # Filter jobs for email (strictly exclude NOT ELIGIBLE)
+        eligible_jobs = [j for j in jobs if j.eligibility_status in ("ELIGIBLE", "MAYBE")]
 
-        # Quote of the day (cycled based on day of year)
-        quote_idx = dt.timetuple().tm_yday % len(CURATED_TECH_QUOTES)
-        quote = CURATED_TECH_QUOTES[quote_idx]
-
-        context: Dict[str, Any] = {
+        context = {
             "subject": subject,
             "date_str": date_str,
-            "today_in_brief": today_in_brief[:3],
-            "ai_items": ai_items,
-            "dev_items": dev_items,
-            "research_items": research_items,
-            "new_jobs": pakistan_jobs,
-            "remote_ai_jobs": remote_ai_jobs,
+            "today_in_brief": today_in_brief,
+            "ai_items": ai_items[:6],
+            "dev_items": dev_items[:5],
+            "research_items": research_items[:5],
+            "new_jobs": eligible_jobs[:8],
             "closing_soon_jobs": closing_soon,
-            "quote": quote,
-            "read_later_items": read_later or []
+            "read_later_items": (read_later or [])[:5],
+            "quote": quote_of_the_day,
+            "dashboard_url": "https://zubairiteng.github.io/devresearch-daily-briefing/"
         }
 
         html_body = self.html_tmpl.render(context)
@@ -152,10 +178,12 @@ class DigestRenderer:
         return subject, html_body, txt_body
 
     def render_error_alert(self, error_message: str) -> Tuple[str, str]:
-        subject = "URGENT: DevResearch Daily Briefing Pipeline Alert"
-        now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        html_body = self.error_tmpl.render(
-            error_message=error_message,
-            timestamp=now_str
-        )
+        """Renders critical failure alert sent when briefing fails all retries."""
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        subject = f"[URGENT] DevResearch Daily Briefing Failed - {now_str}"
+        html_body = self.error_tmpl.render({
+            "timestamp": now_str,
+            "error_message": error_message,
+            "docs_url": "https://github.com/zubairiteng/devresearch-daily-briefing"
+        })
         return subject, html_body

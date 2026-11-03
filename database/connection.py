@@ -51,12 +51,19 @@ def init_db() -> None:
                 fetched_at TEXT NOT NULL,
                 score INTEGER DEFAULT 50,
                 read_later BOOLEAN DEFAULT 0,
-                metadata_json TEXT
+                metadata_json TEXT,
+                emailed_at TEXT DEFAULT NULL
             );
         """)
+        # Safe migration for existing databases
+        try:
+            cursor.execute("ALTER TABLE news_items ADD COLUMN emailed_at TEXT DEFAULT NULL;")
+        except Exception:
+            pass # column already exists
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_news_category ON news_items(category);")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_news_fetched ON news_items(fetched_at);")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_news_read_later ON news_items(read_later);")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_news_emailed ON news_items(emailed_at);")
 
         # Jobs Table
         cursor.execute("""

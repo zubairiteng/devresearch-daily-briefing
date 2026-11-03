@@ -17,6 +17,7 @@ class NewsItemModel(BaseModel):
     score: int = 50
     read_later: bool = False
     metadata: Optional[Dict[str, Any]] = None
+    emailed_at: Optional[str] = None
 
 
 class JobItemModel(BaseModel):

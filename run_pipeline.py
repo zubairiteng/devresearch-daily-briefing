@@ -32,14 +32,15 @@ async def main():
         logger.error("Daily briefing failed.")
         sys.exit(1)
 
-    # Export sample_digest.html using real data from the database
+    # Export sample_digest.html using real data from the database in Easy English
     renderer = DigestRenderer()
-    news_items = NewsRepository.get_latest_news(limit=20)
+    news_items = NewsRepository.get_unemailed_news(limit=15)
+    if not news_items:
+        news_items = NewsRepository.get_latest_news(limit=15)
     jobs = JobRepository.get_jobs(include_not_eligible=False, limit=10)
     closing_soon = JobRepository.get_closing_soon_jobs(days_window=5)
-    read_later = NewsRepository.get_history(only_read_later=True, limit=5)
 
-    subject, html_body, txt_body = renderer.render_urdu_digest(
+    subject, html_body, txt_body = renderer.render_easy_english_digest(
         news_items=news_items,
         jobs=jobs,
         closing_soon=closing_soon
@@ -49,7 +50,7 @@ async def main():
     with open(sample_html_path, "w", encoding="utf-8") as f:
         f.write(html_body)
 
-    logger.info(f"Successfully generated '{sample_html_path}' with real data!")
+    logger.info(f"Successfully generated '{sample_html_path}' with Easy English layout!")
     logger.info(f"Summary: {len(news_items)} news items, {len(jobs)} active jobs for you.")
 
 

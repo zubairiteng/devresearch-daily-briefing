@@ -193,3 +193,42 @@ def test_render_urdu_digest(renderer, sample_news, sample_jobs):
     # 5. Text fallback in Urdu
     assert "ڈیو ریسرچ ڈیلی بریفنگ" in txt
     assert "آج کا کلیدی اداریہ" in txt
+
+
+def test_render_easy_english_digest(renderer, sample_news, sample_jobs):
+    subj, html, txt = renderer.render_easy_english_digest(
+        news_items=sample_news,
+        jobs=sample_jobs,
+        closing_soon=[sample_jobs[0]],
+        date_obj=datetime(2026, 11, 3)
+    )
+
+    # 1. Subject format
+    assert "DevResearch Daily" in subj
+    assert "Nov 03, 2026" in subj
+
+    # 2. Key personalization and layman components
+    assert "Prof. Zubair Ahmad" in html
+    assert "Layman Concept of the Day" in html
+    assert "In Simple Terms" in html
+
+    # 3. Core sections exist
+    assert "Frontier AI &amp; Robotics Watch" in html or "Frontier AI & Robotics Watch" in html
+    assert "Today's Fresh Industry News" in html or "Today&#39;s Fresh Industry News" in html
+    assert "Pakistan Academic &amp; Research" in html or "Pakistan Academic & Research" in html
+    assert "Career &amp; Placement Watch" in html or "Career & Placement Watch" in html
+
+    # 4. Critical entities & grants
+    assert "FIT 2026" in html
+    assert "IRSIP" in html
+    assert "NRPU" in html
+    assert "https://zubairiteng.github.io/devresearch-daily-briefing/" in html
+
+    # 5. Non-eligible jobs filtered out
+    assert "Lecturer in Computer Science" in html
+    assert "Professor of Mathematics" not in html
+
+    # 6. Plain-text checks
+    assert "DEVRESEARCH DAILY BRIEFING" in txt
+    assert "IN SIMPLE TERMS" in txt
+    assert "LAYMAN CONCEPT OF THE DAY" in txt

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>{{ subject }}</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    .wrapper {
+      max-width: 680px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    }
+    .header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 30px 24px;
+    }
+    .header h1 {
+      margin: 0 0 6px 0;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .header .subtitle {
+      color: #93c5fd;
+      font-size: 13px;
+      margin: 0 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+    .header .recipient {
+      color: #e2e8f0;
+      font-size: 14px;
+      margin: 0;
+    }
+    .content {
+      padding: 24px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .section-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+    .brief-box {
+      background-color: #eff6ff;
+      border-left: 4px solid #2563eb;
+      padding: 16px 18px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #1e3a8a;
+    }
+    .concept-box {
+      background: linear-gradient(135deg, #fefce8 0%, #fef08a 100%);
+      border: 1px solid #fde047;
+      border-left: 5px solid #ca8a04;
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .concept-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #854d0e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .concept-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #713f12;
+      margin: 0 0 8px 0;
+    }
+    .concept-text {
+      font-size: 14px;
+      color: #422006;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .concept-takeaway {
+      font-size: 12px;
+      font-weight: 600;
+      color: #854d0e;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+    }
+    .card-title a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+    .card-title a:hover {
+      text-decoration: underline;
+    }
+    .meta {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+    .summary-text {
+      font-size: 14px;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .layman-box {
+      background-color: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .layman-header {
+      font-weight: 700;
+      color: #0f766e;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .layman-item {
+      color: #1e293b;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .layman-item strong {
+      color: #0e7490;
+    }
+    .why-it-matters {
+      font-size: 13px;
+      color: #1e40af;
+      background-color: #eff6ff;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-top: 8px;
+    }
+    .research-gap-box {
+      font-size: 13px;
+      color: #9a3412;
+      background-color: #fff7ed;
+      border-left: 3px solid #f97316;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-top: 8px;
+    }
+    .tag-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-right: 6px;
+      background-color: #e0e7ff;
+      color: #3730a3;
+    }
+    .job-badge-city {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background-color: #f1f5f9;
+      color: #475569;
+      margin-right: 6px;
+    }
+    .job-badge-eligible {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background-color: #dcfce7;
+      color: #166534;
+    }
+    .job-badge-maybe {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+    .job-reason {
+      font-size: 12px;
+      color: #475569;
+      background-color: #f8fafc;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin: 8px 0;
+    }
+    .btn-apply {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #ffffff !important;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-right: 8px;
+    }
+    .btn-source {
+      display: inline-block;
+      font-size: 12px;
+      color: #64748b;
+      text-decoration: none;
+    }
+    .closing-soon-box {
+      padding: 12px 16px;
+      background-color: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+    .btn-portal {
+      display: block;
+      width: fit-content;
+      margin: 28px auto 10px auto;
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: #ffffff !important;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+    }
+    .footer {
+      background-color: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      padding: 24px;
+      font-size: 12px;
+      color: #64748b;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .footer a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Header -->
+    <div class="header">
+      <div class="subtitle">{{ date_str }} &bull; Daily Briefing</div>
+      <h1>DevResearch Briefing</h1>
+      <p class="recipient">Prepared for: <strong>{{ user_name }}</strong> ({{ user_profile_line }})</p>
+    </div>
+
+    <div class="content">
+      <!-- 1. Concept of the Day (In Simple Words) -->
+      {% if concept_of_the_day %}
+      <div class="concept-box">
+        <div class="concept-title">💡 Layman Concept of the Day</div>
+        <div class="concept-name">{{ concept_of_the_day.term }}: {{ concept_of_the_day.layman_title }}</div>
+        <div class="concept-text">{{ concept_of_the_day.simple_explanation }}</div>
+        <div class="concept-takeaway">👉 <strong>For Your Lectures / Students:</strong> {{ concept_of_the_day.takeaway }}</div>
+      </div>
+      {% endif %}
+
+      <!-- 2. Today in Brief -->
+      <div class="brief-box">
+        <div style="font-weight: 700; margin-bottom: 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">📌 Today at a Glance</div>
+        {% for bullet in today_in_brief %}
+          <div style="margin-bottom: 5px;">&bull; {{ bullet }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- 3. Frontier AI & Robotics (Musk, OpenAI, Anthropic, China) -->
+      <div class="section-header">
+        <h2>🚀 Frontier AI &amp; Robotics Watch</h2>
+      </div>
+      {% for story in frontier_ai_briefs %}
+      <div class="card">
+        <div style="margin-bottom: 6px;">
+          <span class="tag-badge">{{ story.tag }}</span>
+          <span style="font-size: 12px; color: #64748b;">Source: {{ story.source }}</span>
+        </div>
+        <div class="card-title">
+          <a href="{{ story.link }}" target="_blank">{{ story.headline }}</a>
+        </div>
+        <div class="summary-text">{{ story.summary }}</div>
+        
+        {% if story.layman_terms %}
+        <div class="layman-box">
+          <div class="layman-header">📌 In Simple Terms (Layman's Guide)</div>
+          {% for lt in story.layman_terms %}
+            <div class="layman-item">&bull; <strong>{{ lt.term }}:</strong> {{ lt.explanation }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="why-it-matters">
+          <strong>Why this matters to you:</strong> {{ story.why_it_matters }}
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- 4. Fresh Daily Tech & Research News (100% Non-Repeating) -->
+      <div class="section-header">
+        <h2>📰 Today's Fresh Industry News <span style="font-size: 12px; color: #16a34a; font-weight: normal; margin-left: 8px;">(Fresh &amp; Non-Repeating)</span></h2>
+      </div>
+      {% if fresh_news_items %}
+        {% for item in fresh_news_items %}
+        <div class="card">
+          <div class="card-title">
+            <a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
+          </div>
+          <div class="meta">{{ item.source_name }} &bull; Category: {{ item.category }} &bull; Score: {{ item.score }}/100</div>
+          <div class="summary-text">{{ item.summary }}</div>
+
+          {% if item.layman_terms %}
+          <div class="layman-box">
+            <div class="layman-header">📌 In Simple Terms</div>
+            {% for lt in item.layman_terms %}
+              <div class="layman-item">&bull; <strong>{{ lt.term }}:</strong> {{ lt.explanation }}</div>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          {% if item.why_it_matters %}
+            <div class="why-it-matters"><strong>Takeaway:</strong> {{ item.why_it_matters }}</div>
+          {% endif %}
+          {% if item.research_gap %}
+            <div class="research-gap-box"><strong>Publication Opportunity / Gap:</strong> {{ item.research_gap }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      {% else %}
+        <p style="color: #64748b; font-style: italic;">All incoming news items have been processed. New updates will appear in tomorrow's run.</p>
+      {% endif %}
+
+      <!-- 5. Academic & Research Watch: IEEE Pakistan & HEC Grants -->
+      <div class="section-header">
+        <h2>🎓 Pakistan Academic &amp; Research Opportunities</h2>
+      </div>
+      {% for program in academic_programs %}
+      <div class="card" style="border-left: 4px solid #0284c7;">
+        <h3 style="margin: 0 0 12px 0; font-size: 15px; color: #0369a1;">{{ program.title }}</h3>
+        {% for itm in program.details_list %}
+          <div style="padding: 10px 12px; background: #f0f9ff; border-radius: 6px; margin-bottom: 10px; font-size: 13px;">
+            <div style="font-weight: 700; color: #0c4a6e; font-size: 14px;">{{ itm.name }}</div>
+            {% if itm.tracks %}<div style="color: #475569; margin-top: 3px;"><strong>Tracks:</strong> {{ itm.tracks }}</div>{% endif %}
+            {% if itm.details %}<div style="color: #334155; margin-top: 3px;">{{ itm.details }}</div>{% endif %}
+            {% if itm.funding %}<div style="color: #15803d; margin-top: 3px;"><strong>Funding / Grant:</strong> {{ itm.funding }}</div>{% endif %}
+            {% if itm.eligibility %}<div style="color: #0369a1; margin-top: 3px;"><strong>Eligibility:</strong> {{ itm.eligibility }}</div>{% endif %}
+            {% if itm.layman_note %}<div style="color: #0f766e; margin-top: 4px; font-style: italic;">{{ itm.layman_note }}</div>{% endif %}
+            <div style="margin-top: 6px;">
+              <a href="{{ itm.link or itm.portal }}" style="color: #0284c7; font-weight: 600; text-decoration: underline;" target="_blank">View Official Portal &rarr;</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+
+      <!-- 6. Open Research Publication Gaps -->
+      <div class="section-header">
+        <h2>🔬 Open Research Gaps (Ready for Paper Publication)</h2>
+      </div>
+      {% for gap in research_gaps %}
+      <div class="card">
+        <div style="font-size: 12px; color: #c2410c; font-weight: 700; text-transform: uppercase;">{{ gap.area }}</div>
+        <div class="card-title" style="margin-top: 4px;">{{ gap.topic }}</div>
+        <div class="summary-text">{{ gap.gap_description }}</div>
+        {% if gap.layman_terms %}
+        <div class="layman-box">
+          <div class="layman-header">📌 In Simple Terms</div>
+          {% for lt in gap.layman_terms %}
+            <div class="layman-item">&bull; <strong>{{ lt.term }}:</strong> {{ lt.explanation }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <!-- 7. Career & Placement Opportunities (Can repeat while active) -->
+      <div class="section-header">
+        <h2>💼 Career &amp; Placement Watch <span style="font-size: 12px; color: #64748b; font-weight: normal; margin-left: 8px;">(Open Positions for You)</span></h2>
+      </div>
+
+      <!-- University & Institutional Roles -->
+      <h4 style="margin: 16px 0 8px 0; font-size: 14px; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.5px;">University &amp; Placement Roles</h4>
+      {% for job in academic_jobs %}
+      <div class="card">
+        <div class="card-title">
+          <a href="{{ job.apply_link or job.primary_url }}" target="_blank">{{ job.title }}</a>
+        </div>
+        <div class="meta">
+          <strong>{{ job.organization }}</strong> &bull;
+          <span class="job-badge-city">{{ job.city }}</span>
+          <span class="{% if job.eligibility_status == 'ELIGIBLE' %}job-badge-eligible{% else %}job-badge-maybe{% endif %}">
+            {{ job.eligibility_status }}
+          </span>
+          &bull; Deadline: <strong>{{ job.deadline }}</strong>
+        </div>
+        <div class="job-reason">
+          <strong>Eligibility Check:</strong> {{ job.eligibility_reason }}
+        </div>
+        <div style="margin-top: 10px;">
+          <a href="{{ job.apply_link or job.primary_url }}" class="btn-apply" target="_blank">Apply / View</a>
+          <a href="{{ job.primary_url }}" class="btn-source" target="_blank">Source Link &rarr;</a>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Remote AI & Dev Roles -->
+      <h4 style="margin: 20px 0 8px 0; font-size: 14px; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.5px;">Remote AI Automation &amp; Web Development</h4>
+      {% for job in tech_remote_jobs %}
+      <div class="card">
+        <div class="card-title">
+          <a href="{{ job.apply_link or job.primary_url }}" target="_blank">{{ job.title }}</a>
+        </div>
+        <div class="meta">
+          <strong>{{ job.organization }}</strong> &bull;
+          <span class="job-badge-city">{{ job.city }}</span>
+          <span class="{% if job.eligibility_status == 'ELIGIBLE' %}job-badge-eligible{% else %}job-badge-maybe{% endif %}">
+            {{ job.eligibility_status }}
+          </span>
+          &bull; Deadline: <strong>{{ job.deadline }}</strong>
+        </div>
+        <div class="job-reason">
+          <strong>Eligibility Check:</strong> {{ job.eligibility_reason }}
+        </div>
+        <div style="margin-top: 10px;">
+          <a href="{{ job.apply_link or job.primary_url }}" class="btn-apply" target="_blank">Apply / View</a>
+          <a href="{{ job.primary_url }}" class="btn-source" target="_blank">Source Link &rarr;</a>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- Closing Soon Jobs Alert -->
+      {% if closing_soon_jobs %}
+      <div style="margin-top: 24px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #b91c1c; text-transform: uppercase; letter-spacing: 0.5px;">⚠️ Closing Soon (Next 5 Days)</h4>
+        {% for cs in closing_soon_jobs %}
+          <div class="closing-soon-box">
+            <strong>{{ cs.title }}</strong> &bull; {{ cs.organization }} ({{ cs.city }}) &bull; Deadline: <strong style="color: #b91c1c;">{{ cs.deadline }}</strong>
+            <div style="margin-top: 4px;">
+              <a href="{{ cs.apply_link or cs.primary_url }}" style="color: #be123c; font-weight: 600; text-decoration: underline;" target="_blank">Apply Before Deadline &rarr;</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Public Portal Button -->
+      <a href="{{ portal_url }}" class="btn-portal" target="_blank">
+        🌐 Open Public Live Dashboard
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      This briefing was curated for <strong>Prof. Zubair Ahmad</strong> by DevResearch Daily Engine.<br>
+      Live public dashboard is always accessible at: <a href="{{ portal_url }}" target="_blank">{{ portal_url }}</a><br>
+      News items are automatically deduplicated and tracked to guarantee fresh updates every day.
+    </div>
+  </div>
+</body>
+</html>

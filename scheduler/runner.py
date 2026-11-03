@@ -51,20 +51,27 @@ async def run_daily_briefing(max_retries: int = 3) -> bool:
         try:
             profile = load_profile()
 
-            # 1. News Pipeline
-            news_pipeline = NewsPipeline(profile=profile)
-            news_items = await news_pipeline.run(top_limit=20)
-
-            # 2. Jobs Pipeline
+            # 1. Fetch live jobs (Jobs can repeat while active)
             jobs_pipeline = JobsPipeline(profile=profile)
             saved_jobs = await jobs_pipeline.run()
+            if not saved_jobs:
+                saved_jobs = JobRepository.get_jobs(include_not_eligible=False, limit=15)
 
-            # 3. Pull closing soon and read later from database
+            # 2. News Pipeline: Strictly fetch unemailed news to guarantee non-repeating daily updates
+            news_items = NewsRepository.get_unemailed_news(limit=15)
+            if len(news_items) < 8:
+                logger.info("Fewer than 8 unemailed news items found in database; running live news pipeline...")
+                news_pipeline = NewsPipeline(profile=profile)
+                fresh_fetched = await news_pipeline.run(top_limit=20)
+                news_items = NewsRepository.get_unemailed_news(limit=15)
+                if not news_items and fresh_fetched:
+                    news_items = fresh_fetched
+
+            # 3. Pull closing soon jobs
             closing_soon = JobRepository.get_closing_soon_jobs(days_window=5)
-            read_later = NewsRepository.get_history(only_read_later=True, limit=5)
 
-            # 4. Render email in rich Urdu
-            subject, html_body, txt_body = renderer.render_urdu_digest(
+            # 4. Render email in Easy English with layman explanations
+            subject, html_body, txt_body = renderer.render_easy_english_digest(
                 news_items=news_items,
                 jobs=saved_jobs,
                 closing_soon=closing_soon
@@ -73,7 +80,13 @@ async def run_daily_briefing(max_retries: int = 3) -> bool:
             # 5. Dispatch email
             success = sender.send_email(subject, html_body, txt_body)
 
-            # 6. Record run log
+            # 6. Mark news items as emailed so they NEVER repeat daily
+            if success and news_items:
+                sent_ids = [n.id for n in news_items if n.id]
+                NewsRepository.mark_news_as_emailed(sent_ids)
+                logger.info(f"Marked {len(sent_ids)} news items as emailed to prevent future repetition.")
+
+            # 7. Record run log
             record_digest_run(
                 status="success" if success else "failed",
                 news_count=len(news_items),

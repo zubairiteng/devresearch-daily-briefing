@@ -142,8 +142,51 @@ class NewsRepository:
             return results
 
     @staticmethod
+    def get_unemailed_news(limit: int = 20, category: Optional[str] = None) -> List[NewsItemModel]:
+        """Fetch fresh news items that have never been sent in an email digest."""
+        with db_session() as conn:
+            cursor = conn.cursor()
+            if category:
+                cursor.execute("""
+                    SELECT * FROM news_items 
+                    WHERE emailed_at IS NULL AND category = ? 
+                    ORDER BY score DESC, id DESC LIMIT ?
+                """, (category, limit))
+            else:
+                cursor.execute("""
+                    SELECT * FROM news_items 
+                    WHERE emailed_at IS NULL 
+                    ORDER BY score DESC, id DESC LIMIT ?
+                """, (limit,))
+            rows = cursor.fetchall()
+            return [NewsRepository._row_to_model(r) for r in rows]
+
+    @staticmethod
+    def mark_news_as_emailed(item_ids: List[int]) -> None:
+        """Mark a list of news item IDs as sent in an email digest to prevent future repeats."""
+        valid_ids = [int(i) for i in item_ids if i is not None]
+        if not valid_ids:
+            return
+        now_str = datetime.now(timezone.utc).isoformat()
+        with db_session() as conn:
+            cursor = conn.cursor()
+            placeholders = ",".join("?" for _ in valid_ids)
+            cursor.execute(f"""
+                UPDATE news_items SET emailed_at = ? WHERE id IN ({placeholders})
+            """, [now_str] + valid_ids)
+
+    @staticmethod
+    def is_url_already_emailed(url: str) -> bool:
+        """Check if an article URL has already been emailed to the user in a past digest."""
+        with db_session() as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT 1 FROM news_items WHERE url = ? AND emailed_at IS NOT NULL LIMIT 1", (url,))
+            return cursor.fetchone() is not None
+
+    @staticmethod
     def _row_to_model(r) -> NewsItemModel:
         meta = json.loads(r["metadata_json"]) if r["metadata_json"] else {}
+        emailed = r["emailed_at"] if "emailed_at" in r.keys() else None
         return NewsItemModel(
             id=r["id"],
             title=r["title"],
@@ -157,5 +200,6 @@ class NewsRepository:
             fetched_at=r["fetched_at"],
             score=r["score"],
             read_later=bool(r["read_later"]),
-            metadata=meta
+            metadata=meta,
+            emailed_at=emailed
         )
